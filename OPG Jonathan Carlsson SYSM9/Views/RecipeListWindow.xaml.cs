@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OPG_Jonathan_Carlsson_SYSM9.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Views
         public RecipeListWindow()
         {
             InitializeComponent();
+            RecipeListWindowViewModel viewModel = new RecipeListWindowViewModel();
+            DataContext = viewModel;
         }
     }
 }
