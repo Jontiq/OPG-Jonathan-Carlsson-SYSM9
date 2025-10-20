@@ -8,5 +8,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 {
     public class LoginWindowViewModel
     {
+        
     }
 }
