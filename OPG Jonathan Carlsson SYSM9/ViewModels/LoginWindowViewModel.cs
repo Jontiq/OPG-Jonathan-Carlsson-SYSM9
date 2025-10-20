@@ -85,5 +85,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 Error = "Invalid username or password.";
             }
         }
+
+        //Helps us gray oout the login button, meaning that both fields in the login UI must have data.
+        private bool CanExecuteLogin(Object parameter)
+        {
+            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput);
+        }
     }
 }

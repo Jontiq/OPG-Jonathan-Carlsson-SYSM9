@@ -12,7 +12,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
     public class UserManager
     {
         private List<User> _users = new List<User>();
-        public User LoggedIn { get; private set; }
+        // Make LoggedIn nullable so it can be null until someone logs in
+        public User? LoggedIn { get; private set; }
 
         public UserManager()
         {
@@ -42,7 +43,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         }
 
         //Returns which user is logged in
-        public User GetLoggedIn()
+        public User? GetLoggedIn()
         {
             return LoggedIn;
         }
