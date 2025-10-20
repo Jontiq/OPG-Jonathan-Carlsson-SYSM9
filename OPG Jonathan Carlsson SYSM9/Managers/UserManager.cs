@@ -11,8 +11,15 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
 {
     public class UserManager
     {
-        public List<User> Users { get; set; } = new List<User>();
+        private List<User> _users = new List<User>();
+        public User LoggedIn { get; private set; }
 
-        
+        public UserManager()
+        {
+            //"normal" user
+            _users.Add(new User("user", "password", "sweden"));
+            //"admin" user
+            _users.Add(new AdminUser("admin", "password", "sweden"));
+        }
     }
 }
