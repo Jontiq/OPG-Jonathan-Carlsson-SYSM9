@@ -1,0 +1,63 @@
+﻿<Window x:Class="OPG_Jonathan_Carlsson_SYSM9.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="300" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="CookMaster" 
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="50"
+                   FontWeight="Bold"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Username: "
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="15"/>
+            <TextBlock Text="Password: "
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       Grid.Row="1"/>
+            <!--DATABIND TO UsernameInput-->
+            <TextBox Grid.Column="1"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="5"/>
+            <!--DATABIND TO PasswordInput-->
+            <PasswordBox Grid.Column="1" 
+                         VerticalAlignment="Center"
+                     Grid.Row="1"
+                     FontSize="15"
+                     Margin="5"/>
+        </Grid>
+        <StackPanel Grid.Row="2">
+            <!--SIGN IN BUTTON, DATABIND TO SignInButton-->
+            <Button Content="Sign In"
+                    Margin="3"/>
+            <!--REGISTER BUTTON, DATABIND TO RegisterButton-->
+            <Button Content="Register"
+                    Margin="3"/>
+            <!--FORGOT PASSWORD BUTTON, DATABIND TO ForgotPasswordButton-->
+            <Button Content="Forgot Password"
+                    Margin="3"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -9,4 +9,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Managers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
