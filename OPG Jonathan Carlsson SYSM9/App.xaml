@@ -6,6 +6,7 @@
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
         <!--UserManager exists here so that we're able to use the same instance of the class everywhere in the application-->
+        <!--Still an issue here! I dont know how to fix? I don't understand why this doesn't work!-->
         <managers:UserManager x:Key="UserManager"/>
     </Application.Resources>
 </Application>
