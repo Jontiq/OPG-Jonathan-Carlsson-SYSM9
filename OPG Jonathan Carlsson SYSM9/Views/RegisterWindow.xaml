@@ -87,6 +87,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Cancel"
+                    Command="{Binding CancelCommand}"
                     Margin="15"/>
             <Button Content="Save"
                     Grid.Column="1"

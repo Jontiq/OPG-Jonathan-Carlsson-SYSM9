@@ -14,8 +14,10 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
     public class LoginWindowViewModel : BaseViewModel
     {
         //props
-        //private read only just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
+        //private readonly just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
         private readonly UserManager _userManager;
+        private readonly NavigationManager _navigationManager;
+
         private string _usernameInput;
         public string UsernameInput
         {
@@ -24,6 +26,10 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             {
                 _usernameInput = value;
                 OnPropertyChanged();
+                if (!string.IsNullOrEmpty(Error))
+                {
+                    Error = string.Empty;
+                }
             }
         }
         private string _passwordInput;
@@ -34,6 +40,10 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             {
                 _passwordInput = value;
                 OnPropertyChanged();
+                if (!string.IsNullOrEmpty(Error))
+                {
+                    Error = string.Empty;
+                }
             }
         }
         //prop for error message in the UI if the user writes invalid password, invalid username etc.
@@ -49,20 +59,21 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
         //command props
         public ICommand LoginCommand { get; }
-        //the two below is not in use yet
         public ICommand RegisterCommand { get; }
+        //The command below is not in use yet
         public ICommand ForgotPasswordCommand { get; }
 
         //constructor
         public LoginWindowViewModel()
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
+            _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
             RegisterCommand = new RelayCommand(execute => ExecuteRegister());
         }
 
         //methods
-        //Calls the LogIn method from UserManager and if succesful, opens the RecipeListWindow and closes the LoginWindow
+        //Calls the LogIn method from UserManager and if succesful, opens the RecipeListWindow and CLOSES the LoginWindow
         private void ExecuteLogin()
         {
             Error = string.Empty;
@@ -70,19 +81,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 
             if (success)
             {
-                //Opens RecipeListWindow (Currently empty)
-                RecipeListWindow recipeWindow = new RecipeListWindow();
-                recipeWindow.Show();
-
-                //Closes login window (perhaps this should be changed? Ineffective?)
-                foreach(Window window in Application.Current.Windows)
-                {
-                    if (window is LoginWindow)
-                    {
-                        window.Close();
-                        break;
-                    }
-                }
+                _navigationManager.CreateWindow<RecipeListWindow>();
+                _navigationManager.ShowWindow<RecipeListWindow>();
+                _navigationManager.HideWindow<LoginWindow>();
             }
             else
             {
@@ -90,30 +91,17 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 Error = "Invalid username or password.";
             }
         }
-
         //Helps us gray out the login button, meaning that both fields in the login UI must have data
-        //Perhaps add the password length requirement?
         private bool CanExecuteLogin()
         {
-            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput);
+            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput) && PasswordInput.Length >= 8;
         }
-
-        //Opens RegisterWindow and Closes the LoginWindow
+        //Opens RegisterWindow and HIDES LoginWindow
         private void ExecuteRegister()
         {
-            //Opens RegisterWindow (Currently empty)
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
-
-            //Closes login window (perhaps this should be changed? Ineffective?)
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is LoginWindow)
-                {
-                    window.Close();
-                    break;
-                }
-            }
+            _navigationManager.CreateWindow<RegisterWindow>();
+            _navigationManager.ShowWindow<RegisterWindow>();
+            _navigationManager.HideWindow<LoginWindow>();
         }
     }
 }
