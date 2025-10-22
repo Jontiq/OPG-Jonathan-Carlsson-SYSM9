@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="400" ResizeMode="NoResize">
+        Title="LoginWindow" Height="400" Width="400" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -64,6 +64,7 @@
                     Margin="3"/>
             <!--REGISTER BUTTON, DATABIND TO RegisterButton-->
             <Button Content="Register"
+                    Command="{Binding RegisterCommand}"
                     Margin="3"/>
             <!--FORGOT PASSWORD BUTTON, DATABIND TO ForgotPasswordButton-->
             <Button Content="Forgot Password"

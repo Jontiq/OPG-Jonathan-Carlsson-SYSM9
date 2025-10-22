@@ -58,10 +58,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
+            RegisterCommand = new RelayCommand(execute => ExecuteRegister());
         }
 
         //methods
-        //Login method
+        //Calls the LogIn method from UserManager and if succesful, opens the RecipeListWindow and closes the LoginWindow
         private void ExecuteLogin()
         {
             Error = string.Empty;
@@ -90,10 +91,29 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             }
         }
 
-        //Helps us gray oout the login button, meaning that both fields in the login UI must have data.
+        //Helps us gray out the login button, meaning that both fields in the login UI must have data
+        //Perhaps add the password length requirement?
         private bool CanExecuteLogin()
         {
             return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput);
+        }
+
+        //Opens RegisterWindow and Closes the LoginWindow
+        private void ExecuteRegister()
+        {
+            //Opens RegisterWindow (Currently empty)
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+
+            //Closes login window (perhaps this should be changed? Ineffective?)
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is LoginWindow)
+                {
+                    window.Close();
+                    break;
+                }
+            }
         }
     }
 }
