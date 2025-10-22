@@ -50,7 +50,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public ICommand LoginCommand { get; }
 
         //constructor
-        public LoginWindowViewModel(UserManager userManager)
+        public LoginWindowViewModel()
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
