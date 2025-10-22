@@ -8,8 +8,9 @@
         Title="RegisterWindow" Height="400" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
+
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -27,15 +28,38 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <TextBlock Text="Username: "
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        FontSize="15"/>
             <TextBox Grid.Column="1"
-                     Text="{Binding UsernameInput}"
+                     Text="{Binding UsernameInput,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"/>
+            <!--USERNAME IS TAKEN TEXTBLOCK-->
+            <TextBlock Text="Username is not available!"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Foreground="Red">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility"
+                                Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UsernameTaken}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </Grid>
         <!--COUNTRY-->
         <Grid Grid.Row="2">

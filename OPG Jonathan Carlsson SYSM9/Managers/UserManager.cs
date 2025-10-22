@@ -12,7 +12,10 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
     public class UserManager
     {
         private List<User> _users = new List<User>();
-        //Make LoggedIn nullable so it can be null until someone logs in
+        public List<User> Users
+        {
+            get { return _users; }
+        }
         //LoggedIn being "private set" just because we want to be able to set it within the class
         public User LoggedIn { get; private set; }
 

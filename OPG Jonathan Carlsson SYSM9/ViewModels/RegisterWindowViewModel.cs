@@ -1,5 +1,6 @@
 ﻿using MVVM_KlonaMIg.MVVM;
 using OPG_Jonathan_Carlsson_SYSM9.Managers;
+using OPG_Jonathan_Carlsson_SYSM9.Models;
 using OPG_Jonathan_Carlsson_SYSM9.Views;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             {
                 _usernameInput = value;
                 OnPropertyChanged();
+                //Checks if the username is taken everytime the username is updated, and sets the boolean "UsernameTaken" to true och false.
+                CheckIfUsernameTaken();
             }
         }
         public string[] Countries { get; } =
@@ -98,6 +101,16 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             set
             {
                 _passwordsMatch = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _usernameTaken;
+        public bool UsernameTaken
+        {
+            get { return _usernameTaken; }
+            set
+            {
+                _usernameTaken = value;
                 OnPropertyChanged();
             }
         }
@@ -170,6 +183,24 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 PasswordsMatch = false;
             }
 
+        }
+
+        public void CheckIfUsernameTaken()
+        {
+            bool found = false;
+            foreach (User user in _userManager.Users)
+            {
+                if (UsernameInput == user.Username)
+                {
+                    found = true;
+                    break;
+                }
+                else
+                {
+                    found = false;
+                }
+            }
+            UsernameTaken = found;
         }
 
         //Cancels the registration, opens the LoginWindow and closes the RegisterWindow without saving anything.
