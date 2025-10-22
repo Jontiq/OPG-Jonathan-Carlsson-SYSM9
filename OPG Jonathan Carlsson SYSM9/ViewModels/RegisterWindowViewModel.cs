@@ -152,7 +152,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                     }
                 }
             }
-            if (hasSpecial && hasSpecial)
+            if (hasSpecial && hasDigit)
             {
                 HasNumberAndSpecial = true;
             }
