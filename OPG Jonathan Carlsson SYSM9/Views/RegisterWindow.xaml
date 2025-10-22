@@ -129,7 +129,7 @@
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground"
-                                Value="Red"/>
+                                Value="Gray"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsLengthValid}" Value="True">
                                 <Setter Property="Foreground" Value="Green"/>
@@ -147,7 +147,7 @@
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground"
-                                Value="Red"/>
+                                Value="Gray"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding HasNumberAndSpecial}" Value="True">
                                 <Setter Property="Foreground" Value="Green"/>
@@ -164,7 +164,7 @@
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground"
-                                Value="Red"/>
+                                Value="Gray"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding PasswordsMatch}" Value="True">
                                 <Setter Property="Foreground" Value="Green"/>
@@ -181,7 +181,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel"
+            <Button Content="Go Back"
                     Command="{Binding CancelCommand}"
                     Margin="15"/>
             <Button Content="Save"
