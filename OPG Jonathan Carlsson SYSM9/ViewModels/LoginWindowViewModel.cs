@@ -14,6 +14,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
     public class LoginWindowViewModel : BaseViewModel
     {
         //props
+        //private read only just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
         private readonly UserManager _userManager;
         private string _usernameInput;
         public string UsernameInput
@@ -46,30 +47,33 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 OnPropertyChanged();
             }
         }
-        //prop for binding the command from LoginButton to LoginCommand
+        //command props
         public ICommand LoginCommand { get; }
+        //the two below is not in use yet
+        public ICommand RegisterCommand { get; }
+        public ICommand ForgotPasswordCommand { get; }
 
         //constructor
         public LoginWindowViewModel()
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
-            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
+            LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
         }
 
         //methods
-
-        private void ExecuteLogin(object parameter)
+        //Login method
+        private void ExecuteLogin()
         {
             Error = string.Empty;
             bool success = _userManager.LogIn(UsernameInput, PasswordInput);
 
             if (success)
             {
-                //Opens RecipeListWindow
+                //Opens RecipeListWindow (Currently empty)
                 RecipeListWindow recipeWindow = new RecipeListWindow();
                 recipeWindow.Show();
 
-                //Closes login window
+                //Closes login window (perhaps this should be changed? Ineffective?)
                 foreach(Window window in Application.Current.Windows)
                 {
                     if (window is LoginWindow)
@@ -87,7 +91,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //Helps us gray oout the login button, meaning that both fields in the login UI must have data.
-        private bool CanExecuteLogin(Object parameter)
+        private bool CanExecuteLogin()
         {
             return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput);
         }

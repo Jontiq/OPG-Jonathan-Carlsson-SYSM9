@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="400">
+        Title="LoginWindow" Height="300" Width="400" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -38,25 +38,29 @@
                        Grid.Row="1"/>
             <!--DATABIND TO UsernameInput-->
             <TextBox Grid.Column="1"
+                     Text="{Binding UsernameInput, Mode=TwoWay}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"/>
             <!--DATABIND TO PasswordInput-->
-            <PasswordBox Grid.Column="1" 
-                     VerticalAlignment="Center"
-                     Grid.Row="1"
-                     FontSize="15"
-                     Margin="5"/>
+            <PasswordBox Grid.Column="1"
+                         x:Name="Pwd" 
+                         PasswordChanged="Pwd_PasswordChanged"
+                         VerticalAlignment="Center"
+                         Grid.Row="1"
+                         FontSize="15"
+                         Margin="5"/>
         </Grid>
-        <!--Incorrect input (error) textblock, Should be hidden and only shown IF wrong input is made-->
-        <TextBlock Text="Incorrect username or password"
+        <!--Incorrect input (error) textblock, Should be hidden or empty and only shown IF wrong input is made-->
+        <TextBlock Text="{Binding Error}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Foreground="Red"
                    Grid.Row="2"/>
         <StackPanel Grid.Row="3">
-            <!--SIGN IN BUTTON, DATABIND TO SignInButton-->
+            <!--SIGN IN BUTTON, COMMAND TO LogIn Method-->
             <Button Content="Sign In"
+                    Command="{Binding LoginCommand}"
                     Margin="3"/>
             <!--REGISTER BUTTON, DATABIND TO RegisterButton-->
             <Button Content="Register"

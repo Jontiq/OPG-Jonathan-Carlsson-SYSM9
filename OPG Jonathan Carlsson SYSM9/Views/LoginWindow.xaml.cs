@@ -23,5 +23,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9
             LoginWindowViewModel viewModel = new LoginWindowViewModel();
             DataContext = viewModel;
         }
+
+        //Is being used by textbox "pwd" in LoginWindow.xaml, helps us set the password input through an event.
+        private void Pwd_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LoginWindowViewModel viewModel)
+                viewModel.PasswordInput = Pwd.Password;
+        }
     }
 }

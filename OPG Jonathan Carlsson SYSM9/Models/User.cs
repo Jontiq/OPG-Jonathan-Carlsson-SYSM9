@@ -13,7 +13,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         public string Password { get; set; }
         public string Country { get; set; }
 
-        //Metoden kanske borde ligga i viewmodel istället? flyttar sen när jag skapat viewmodeln
+        //Metoden kanske borde ligga i viewmodel istället? flyttar sen när jag skapat viewmodeln. Blir aktuell i register viewmodel
         //public string Password
         //{
         //    get { return _password; }
