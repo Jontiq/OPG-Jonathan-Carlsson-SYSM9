@@ -28,7 +28,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9
         private void Pwd_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is LoginWindowViewModel viewModel)
+            {
                 viewModel.PasswordInput = Pwd.Password;
+            }
         }
     }
 }

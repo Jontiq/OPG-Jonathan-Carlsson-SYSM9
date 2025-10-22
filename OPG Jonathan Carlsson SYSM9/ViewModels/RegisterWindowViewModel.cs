@@ -3,10 +3,13 @@ using OPG_Jonathan_Carlsson_SYSM9.Managers;
 using OPG_Jonathan_Carlsson_SYSM9.Views;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
@@ -14,10 +17,94 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
     public class RegisterWindowViewModel : BaseViewModel
     {
         //props
-        //private readonly just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
+        //Refrences to globally shared singletons
+        //Private readonly just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
         private readonly UserManager _userManager;
         private readonly NavigationManager _navigationManager;
+
+        //"Normal" props
+        private string _usernameInput;
+        public string UsernameInput
+        {
+            get { return _usernameInput; }
+            set
+            {
+                _usernameInput = value;
+                OnPropertyChanged();
+            }
+        }
+        public string[] Countries { get; } =
+        {
+                "Sweden",
+                "Norway",
+                "Finland",
+                "Denmark",
+                "Iceland"
+        };
+        private string _selectedCountry;
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set
+            {
+                _selectedCountry = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _passwordInput;
+        public string PasswordInput
+        {
+            get { return _passwordInput; }
+            set
+            {
+                _passwordInput = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _confirmPwInput;
+        public string ConfirmPwInput
+        {
+            get { return _confirmPwInput; }
+            set
+            {
+                _confirmPwInput = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isLengthValid;
+        public bool IsLengthValid
+        {
+            get { return _isLengthValid; }
+            set
+            {
+                _isLengthValid = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _hasNumberAndSpecial;
+        public bool HasNumberAndSpecial
+        {
+            get { return _hasNumberAndSpecial; }
+            set
+            {
+                _hasNumberAndSpecial = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _passwordsMatch;
+        public bool PasswordsMatch
+        {
+            get { return _passwordsMatch; }
+            set
+            {
+                _passwordsMatch = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //Command props
         public ICommand CancelCommand { get; }
+        public ICommand RegisterUserCommand { get; }
 
         //constructor
         public RegisterWindowViewModel()
@@ -30,6 +117,61 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //methods
+        private void ExecuteCreateUser()
+        {
+
+        }
+        //Checks if all the password requirements are followed
+        public void CheckPasswordRules()
+        {
+            //Checks if the password is 8 characters or more
+            if (!string.IsNullOrEmpty(PasswordInput) && PasswordInput.Length >= 8)
+            {
+                IsLengthValid = true;
+            }
+            else
+            {
+                IsLengthValid = false;
+            }
+
+            //Checks if the password contains atleas 1 number and special character
+            bool hasDigit = false;
+            bool hasSpecial = false;
+            //IsNullOrWhiteSpace because of char control, since 1 space is considered whitespcace
+            if (!string.IsNullOrWhiteSpace(PasswordInput))
+            {
+                foreach (char c in PasswordInput)
+                {
+                    if (char.IsDigit(c))
+                    {
+                        hasDigit = true;
+                    }
+                    else if (!char.IsLetterOrDigit(c))
+                    {
+                        hasSpecial = true;
+                    }
+                }
+            }
+            if (hasSpecial && hasSpecial)
+            {
+                HasNumberAndSpecial = true;
+            }
+            else
+            {
+                HasNumberAndSpecial = false;
+            }
+
+            if(!string.IsNullOrWhiteSpace(PasswordInput) && PasswordInput == ConfirmPwInput)
+            {
+                PasswordsMatch = true;
+            }
+            else
+            {
+                PasswordsMatch = false;
+            }
+
+        }
+
         //Cancels the registration, opens the LoginWindow and closes the RegisterWindow without saving anything.
         private void ExecuteCancel()
         {

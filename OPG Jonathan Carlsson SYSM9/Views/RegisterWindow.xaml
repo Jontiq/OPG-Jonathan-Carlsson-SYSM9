@@ -13,12 +13,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.2*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Register"
                    HorizontalAlignment="Center"
-                   FontSize="20"
+                   VerticalAlignment="Center"
+                   FontSize="30"
                    FontWeight="Bold"/>
         <!--USERNAME-->
         <Grid Grid.Row="1">
@@ -31,6 +32,7 @@
                        VerticalAlignment="Center"
                        FontSize="15"/>
             <TextBox Grid.Column="1"
+                     Text="{Binding UsernameInput}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"/>
@@ -46,9 +48,10 @@
                        VerticalAlignment="Center"
                        FontSize="15"/>
             <ComboBox Grid.Column="1"
-                     VerticalAlignment="Center"
-                     FontSize="15"
-                     Margin="5"/>
+                      ItemsSource="{Binding Countries}"
+                      VerticalAlignment="Center"
+                      FontSize="15"
+                      Margin="5"/>
         </Grid>
         <!--PASSWORD-->
         <Grid Grid.Row="3">
@@ -61,6 +64,8 @@
                        VerticalAlignment="Center"
                        FontSize="15"/>
             <PasswordBox Grid.Column="1"
+                         x:Name="Pwd" 
+                         PasswordChanged="Pwd_PasswordChanged"
                          VerticalAlignment="Center"
                          FontSize="15"
                          Margin="5"/>
@@ -76,10 +81,75 @@
                        VerticalAlignment="Center"
                        FontSize="15"/>
             <PasswordBox Grid.Column="1"
+                         x:Name="PwdConfirm"
+                         PasswordChanged="PwdConfirm_PasswordChanged"
                          VerticalAlignment="Center"
                          FontSize="15"
                          Margin="5"/>
         </Grid>
+        <!--PASSWORD REQUIREMENTS-->
+        <StackPanel Grid.Row="5"
+                    VerticalAlignment="Center">
+            <TextBlock Grid.Row="5"
+                       Text="Password Requirements: "
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"/>
+
+            <TextBlock Grid.Row="5"
+                       Text="Minimum 8 characters"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <!--Makes the text turn green if the requirement is fulfilled-->
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="Red"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLengthValid}" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            
+            <TextBlock Grid.Row="5"
+                       Text="At least one number and one special character"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <!--Makes the text turn green if the requirement is fulfilled-->
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="Red"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasNumberAndSpecial}" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Grid.Row="5"
+                       Text="Both password fields must match"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <!--Makes the text turn green if the requirement is fulfilled-->
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="Red"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PasswordsMatch}" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+
         <!--"CANCEL" AND "SAVE" BUTTON-->
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>

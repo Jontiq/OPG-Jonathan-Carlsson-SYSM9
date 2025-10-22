@@ -14,10 +14,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
     public class LoginWindowViewModel : BaseViewModel
     {
         //props
-        //private readonly just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
+        //Refrences to globally shared singletons
+        //Private readonly just because we don't want it to be able to change outside of class, and only to be "created" in the constructor
         private readonly UserManager _userManager;
         private readonly NavigationManager _navigationManager;
 
+        //"Normal" props
         private string _usernameInput;
         public string UsernameInput
         {
@@ -57,7 +59,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 OnPropertyChanged();
             }
         }
-        //command props
+        //Command props
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
         //The command below is not in use yet
