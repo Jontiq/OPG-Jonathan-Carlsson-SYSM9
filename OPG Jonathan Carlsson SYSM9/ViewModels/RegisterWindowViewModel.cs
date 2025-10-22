@@ -125,6 +125,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             //LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
+            RegisterUserCommand = new RelayCommand(execute => ExecuteCreateUser(), canExecute => CanExecuteCreateUser());
             CancelCommand = new RelayCommand(execute => ExecuteCancel());
 
         }
@@ -132,7 +133,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //methods
         private void ExecuteCreateUser()
         {
+            
+        }
 
+        private bool CanExecuteCreateUser()
+        {
+            return HasNumberAndSpecial && IsLengthValid && PasswordsMatch && !UsernameTaken && SelectedCountry != null;
         }
         //Checks if all the password requirements are followed
         public void CheckPasswordRules()
