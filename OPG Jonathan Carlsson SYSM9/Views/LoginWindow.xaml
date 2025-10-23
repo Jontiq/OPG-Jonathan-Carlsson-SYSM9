@@ -68,6 +68,7 @@
                     Margin="3"/>
             <!--FORGOT PASSWORD BUTTON, DATABIND TO ForgotPasswordButton-->
             <Button Content="Forgot Password"
+                    Command="{Binding ForgotPasswordCommand}"
                     Margin="3"/>
 
         </StackPanel>

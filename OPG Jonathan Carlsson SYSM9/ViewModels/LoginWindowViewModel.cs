@@ -72,6 +72,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
             RegisterCommand = new RelayCommand(execute => ExecuteRegister());
+            ForgotPasswordCommand = new RelayCommand(execute => ExecuteForgotPassword());
         }
 
         //methods
@@ -103,6 +104,13 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _navigationManager.CreateWindow<RegisterWindow>();
             _navigationManager.ShowWindow<RegisterWindow>();
+            _navigationManager.HideWindow<LoginWindow>();
+        }
+        //Opens ForgotPasswordWindow and HIDES LoginWindow
+        private void ExecuteForgotPassword()
+        {
+            _navigationManager.CreateWindow<ForgotPasswordWindow>();
+            _navigationManager.ShowWindow<ForgotPasswordWindow>();
             _navigationManager.HideWindow<LoginWindow>();
         }
     }

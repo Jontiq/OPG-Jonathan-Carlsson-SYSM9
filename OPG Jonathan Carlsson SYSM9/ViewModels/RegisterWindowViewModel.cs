@@ -71,7 +71,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 OnPropertyChanged();
             }
         }
-        //CurrentlyWorkingON
         private string _questionAnswer;
         public string QuestionAnswer
         {
