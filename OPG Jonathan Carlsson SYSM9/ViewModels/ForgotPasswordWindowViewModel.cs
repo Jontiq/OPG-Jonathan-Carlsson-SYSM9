@@ -14,6 +14,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 {
     public class ForgotPasswordWindowViewModel : BaseViewModel
     {
+        //OH NO, THE NAME OF THIS WINDOW GOES AGAINST THE NOOOORM (shouldn't have "window" in the name)!! i need to change this without destroying everything...
         //props
         private readonly UserManager _userManager;
         private readonly NavigationManager _navigationManager;
@@ -53,12 +54,23 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             get { return _questionAnswer; }
             set
             {
-                _questionAnswer = value;
+                _questionAnswer = value.ToLower();
+                OnPropertyChanged();
+            }
+        }
+        private bool _userFound;
+        public bool UserFound
+        {
+            get { return _userFound; }
+            set
+            {
+                _userFound = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand CancelCommand { get; }
+        public ICommand SubmitCommand { get; }
 
 
         //construcor
@@ -66,6 +78,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
+            //LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
+            SubmitCommand = new RelayCommand(execute => ExecuteValidationSecurityQuestion(), canExecute => CanExecuteValidation());
             CancelCommand = new RelayCommand(execute => ExecuteCancel());
 
             SecurityQuestion = "Please enter your username!";
@@ -76,17 +90,50 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager.ShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<ForgotPasswordWindow>();
         }
-
+        //Returns string value if the SecurityQuestion beloning to UsernameInput if the user exists.
         public string FindUserSecurityQuestion()
         {
             foreach (User u in _userManager.Users)
             {
                 if (u.Username == UsernameInput)
                 {
+                    UserFound = true;
                     return u.SecurityQuestion;
                 }
             }
+            UserFound = false;
             return "User not found, please check your username.";
+        }
+        private bool CanExecuteValidation()
+        {
+            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(QuestionAnswer) && SecurityQuestion != "Please enter your username!"
+                && SecurityQuestion != "User not found, please check your username.";
+        }
+        //Checks if the Answer for the SecurityQuestion is correct. If it's not, a messagebox will pop up, if it's correct, a window will pop up letting the user change password
+        public void ExecuteValidationSecurityQuestion()
+        {
+                //Finds the correct answer and checks if it match with the input answer
+                foreach (User u in _userManager.Users)
+                {
+                    if (u.Username == UsernameInput)
+                    {
+                        //Correct answer
+                        if (u.SecurityAnswer == QuestionAnswer)
+                        {
+                            _navigationManager.CreateWindow<ChangePasswordWindow>();
+                            _navigationManager.ShowWindow<ChangePasswordWindow>();
+                            _navigationManager.CloseWindow<ForgotPasswordWindow>();
+                            _navigationManager.HideWindow<LoginWindow>();
+
+                        }
+                        //Incorrect Answer
+                        else
+                        {
+                            MessageBox.Show("Incorrect answer, please try again", "Error");
+                        }
+                        return;
+                    }
+                }
         }
     }
 }
