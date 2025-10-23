@@ -26,5 +26,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Views
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
             DataContext = viewModel;
         }
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            if (DataContext is ChangePasswordViewModel vm)
+            {
+                vm.CancelCommand.Execute(null);
+            }
+        }
     }
 }
