@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9.Views"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="400" Width="400" ResizeMode="NoResize"
+        Title="RegisterWindow" Height="400" Width="510" ResizeMode="NoResize"
         Closed="WindowClosed">
     <Grid>
         <Grid.RowDefinitions>
 
             <RowDefinition Height="*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -20,17 +22,17 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Register"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="30"
+                   VerticalAlignment="Top"
+                   FontSize="20"
                    FontWeight="Bold"/>
         <!--USERNAME-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.8*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Username: "
@@ -66,7 +68,7 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Country: "
                        HorizontalAlignment="Right"
@@ -79,11 +81,44 @@
                       FontSize="15"
                       Margin="5"/>
         </Grid>
-        <!--PASSWORD-->
+        <!--SECURITY QUESTION-->
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Security Question: "
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="15"/>
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding Questions}"
+                      SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      VerticalAlignment="Center"
+                      FontSize="15"
+                      Margin="5"/>
+        </Grid>
+        <!--SECURITY ANSWER-->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Answer: "
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                FontSize="15"/>
+            <TextBox Grid.Column="1"
+                      VerticalAlignment="Center"
+                      FontSize="15"
+                      Margin="5"/>
+        </Grid>
+
+        <!--PASSWORD-->
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Password: "
                        HorizontalAlignment="Right"
@@ -97,10 +132,10 @@
                          Margin="5"/>
         </Grid>
         <!--CONFIRM PASSWORD-->
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Confirm Password: "
                        HorizontalAlignment="Right"
@@ -114,7 +149,7 @@
                          Margin="5"/>
         </Grid>
         <!--PASSWORD REQUIREMENTS-->
-        <StackPanel Grid.Row="5"
+        <StackPanel Grid.Row="7"
                     VerticalAlignment="Center">
             <TextBlock Grid.Row="5"
                        Text="Password Requirements: "
@@ -122,8 +157,7 @@
                        VerticalAlignment="Center"
                        FontWeight="Bold"/>
 
-            <TextBlock Grid.Row="5"
-                       Text="Minimum 8 characters"
+            <TextBlock Text="Minimum 8 characters"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                 <!--Makes the text turn green if the requirement is fulfilled-->
@@ -140,8 +174,7 @@
                 </TextBlock.Style>
             </TextBlock>
             
-            <TextBlock Grid.Row="5"
-                       Text="At least one number and one special character"
+            <TextBlock Text="At least one number and one special character"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                 <!--Makes the text turn green if the requirement is fulfilled-->
@@ -157,8 +190,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Row="5"
-                       Text="Both password fields must match"
+            <TextBlock Text="Both password fields must match"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                 <!--Makes the text turn green if the requirement is fulfilled-->
@@ -177,18 +209,20 @@
         </StackPanel>
 
         <!--"CANCEL" AND "SAVE" BUTTON-->
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Go Back"
                     Command="{Binding CancelCommand}"
-                    Margin="15"/>
+                    Margin="10"
+                    Width="150"/>
             <Button Content="Save"
                     Command="{Binding RegisterUserCommand}"
                     Grid.Column="1"
-                    Margin="15"/>
+                    Margin="10"
+                    Width="150"/>
         </Grid>
     </Grid>
 </Window>

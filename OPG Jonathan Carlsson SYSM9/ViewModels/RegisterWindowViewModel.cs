@@ -36,6 +36,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 CheckIfUsernameTaken();
             }
         }
+
         public string[] Countries { get; } =
         {
                 "Sweden",
@@ -51,6 +52,23 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             set
             {
                 _selectedCountry = value;
+                OnPropertyChanged();
+            }
+        }
+        public string[] Questions { get; } =
+        {
+                "What city were you born in?",
+                "What was the first concert you attended?",
+                "In what city did your parents meet?",
+                "What was the name of your first pet?",
+        };
+        private string _selectedQuestion;
+        public string SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
                 OnPropertyChanged();
             }
         }
