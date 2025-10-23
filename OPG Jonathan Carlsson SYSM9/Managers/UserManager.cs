@@ -22,9 +22,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         public UserManager()
         {
             //"normal" user
-            _users.Add(new User("user", "password", "sweden"));
+            _users.Add(new User("user", "password", "sweden", "fråga", "svar"));
             //"admin" user
-            _users.Add(new AdminUser("admin", "password", "sweden"));
+            _users.Add(new AdminUser("admin", "password", "sweden", "fråga", "svar"));
         }
 
         //Allowes user to log in if username and password match, and returns boolean value "TRUE".

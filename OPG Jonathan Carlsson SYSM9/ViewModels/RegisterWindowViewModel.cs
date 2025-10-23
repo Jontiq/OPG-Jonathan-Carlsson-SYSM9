@@ -36,7 +36,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 CheckIfUsernameTaken();
             }
         }
-
         public string[] Countries { get; } =
         {
                 "Sweden",
@@ -69,6 +68,17 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             set
             {
                 _selectedQuestion = value;
+                OnPropertyChanged();
+            }
+        }
+        //CurrentlyWorkingON
+        private string _questionAnswer;
+        public string QuestionAnswer
+        {
+            get { return _questionAnswer; }
+            set
+            {
+                _questionAnswer = value;
                 OnPropertyChanged();
             }
         }
@@ -151,7 +161,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //methods
         private void ExecuteCreateUser()
         {
-            _userManager.Users.Add(new User(UsernameInput, PasswordInput, SelectedCountry));
+            _userManager.Users.Add(new User(UsernameInput, PasswordInput, SelectedCountry, SelectedQuestion, QuestionAnswer));
             MessageBox.Show("New user has been created!");
             _navigationManager.ShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RegisterWindow>();
@@ -159,7 +169,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 
         private bool CanExecuteCreateUser()
         {
-            return HasNumberAndSpecial && IsLengthValid && PasswordsMatch && !UsernameTaken && SelectedCountry != null;
+            return HasNumberAndSpecial && IsLengthValid && PasswordsMatch && !UsernameTaken && SelectedCountry != null && SelectedQuestion != null && !string.IsNullOrWhiteSpace(QuestionAnswer);
         }
         //Checks if all the password requirements are followed
         public void CheckPasswordRules()

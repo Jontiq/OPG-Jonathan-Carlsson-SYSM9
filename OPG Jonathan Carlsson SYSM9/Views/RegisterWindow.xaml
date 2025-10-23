@@ -109,11 +109,12 @@
                 VerticalAlignment="Center"
                 FontSize="15"/>
             <TextBox Grid.Column="1"
-                      VerticalAlignment="Center"
-                      FontSize="15"
-                      Margin="5"/>
+                     Text="{Binding QuestionAnswer,UpdateSourceTrigger=PropertyChanged}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="5"/>
         </Grid>
-
+        
         <!--PASSWORD-->
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
