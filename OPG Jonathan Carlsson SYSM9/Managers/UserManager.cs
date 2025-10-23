@@ -46,6 +46,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             LoggedIn = null;
         }
 
+
+
         //Returns which user is logged in
         public User GetLoggedIn()
         {
