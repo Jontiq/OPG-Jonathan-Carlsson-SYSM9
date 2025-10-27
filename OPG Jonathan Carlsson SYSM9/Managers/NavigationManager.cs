@@ -13,10 +13,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
     {
         //"T" is for generic type, meaning that the type is decided when using the method. "T" must inherit from "Window", and if it does, create "new" "T".
         
-        //Creates a new window of the "T" window.
-        public void CreateWindow<T>() where T : Window, new()
+        //Creates and shows new window
+        public void CreateAndShowWindow<T>() where T : Window, new()
         {
+            //Creates window
             T window = new T();
+            window.Show();
         }
 
         //Closes "T" if it inherit from Window
@@ -31,30 +33,13 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
                 }
             }
         }
-
-        //Hides "T" if it inherit from Window
-        public void HideWindow<T>() where T : Window
+        //Closes all windows except T
+        public void CloseAllExcept<T>() where T : Window
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window is T)
-                {
-                    window.Hide();
-                    break;
-                }
-            }
-        }
-
-        //Shows "T" if it inherit from Window and already exists (AKA have been created)
-        public void ShowWindow<T>() where T : Window
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is T)
-                {
-                    window.Show();
-                    break;
-                }
+                if (window is not T)
+                    window.Close();
             }
         }
     }
