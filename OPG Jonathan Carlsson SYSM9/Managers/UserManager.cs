@@ -16,8 +16,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         {
             get { return _users; }
         }
-        //LoggedIn being "private set" just because we want to be able to set it within the class
-        public User LoggedIn { get; private set; }
+        private User LoggedIn { get; set; }
 
         public UserManager()
         {
@@ -46,12 +45,16 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             LoggedIn = null;
         }
 
-
-
         //Returns which user is logged in
         public User GetLoggedIn()
         {
             return LoggedIn;
+        }
+
+        //Changes the password for the logged in user
+        public void ChangePassword(string newPassword)
+        {
+            LoggedIn.Password = newPassword;
         }
     }
 }

@@ -19,6 +19,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         private readonly UserManager _userManager;
 
         //normal props
+        private User _loggedInUser;
+
         private string _loggedUsername;
         public string LoggedUsername
         {
@@ -29,8 +31,57 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string _newPassword;
+        public string NewPassword
+        {
+            get { return _newPassword; }
+            set
+            {
+                _newPassword = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _confirmPassword;
+        public string ConfirmPassword
+        {
+            get { return _confirmPassword; }
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isLengthValid;
+        public bool IsLengthValid
+        {
+            get { return _isLengthValid; }
+            set
+            {
+                _isLengthValid = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _hasNumberAndSpecial;
+        public bool HasNumberAndSpecial
+        {
+            get { return _hasNumberAndSpecial; }
+            set
+            {
+                _hasNumberAndSpecial = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _passwordsMatch;
+        public bool PasswordsMatch
+        {
+            get { return _passwordsMatch; }
+            set
+            {
+                _passwordsMatch = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ICommand CancelCommand { get; }
         public ICommand GoBackCommand { get; }
 
         //constructor
@@ -39,21 +90,30 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             //_navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
-            CancelCommand = new RelayCommand(execute => ExecuteCancel());
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
 
             //Gets the logged in user and sends the user values to designated prop
-            User LoggedInUser = _userManager.GetLoggedIn();
-            LoggedUsername = LoggedInUser.Username;
+            LoggedUsername = _userManager.GetLoggedIn().Username;
         }
-        private void ExecuteCancel()
+
+        //methods
+        //Checks if all of the password requirements are met before showing the Update Password button.
+        private bool CanExecuteUpdatePassword()
         {
-            //Also logs out the user when the window is closed, just a safety measure.
+            return HasNumberAndSpecial && IsLengthValid && PasswordsMatch;
+        }
+        //Updates the password
+        public void ExecuteUpdatePassword()
+        {
+            MessageBox.Show("Password has been updated!");
+            _userManager.ChangePassword(NewPassword);
+            //logs out for just in case
             _userManager.LogOut();
+            //Sends the user back to the login window
             _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<ChangePasswordWindow>();
-
         }
+
         //If the user presses "Go back", they are "logged out" and returned to the previous page, different from pressing "x" which would be the method "ExecuteCancel"
         private void ExecuteGoBack()
         {
@@ -61,6 +121,56 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _userManager.LogOut();
             _navigationManager.CreateAndShowWindow<ForgotPasswordWindow>();
             _navigationManager.CloseWindow<ChangePasswordWindow>();
+        }
+
+        public void CheckPasswordRules()
+        {
+            //Checks if the password is 8 characters or more
+            if (!string.IsNullOrEmpty(NewPassword) && NewPassword.Length >= 8)
+            {
+                IsLengthValid = true;
+            }
+            else
+            {
+                IsLengthValid = false;
+            }
+
+            //Checks if the password contains atleas 1 number and special character
+            bool hasDigit = false;
+            bool hasSpecial = false;
+            //IsNullOrWhiteSpace because of char control, since 1 space is considered whitespcace
+            if (!string.IsNullOrWhiteSpace(NewPassword))
+            {
+                foreach (char c in NewPassword)
+                {
+                    if (char.IsDigit(c))
+                    {
+                        hasDigit = true;
+                    }
+                    else if (!char.IsLetterOrDigit(c))
+                    {
+                        hasSpecial = true;
+                    }
+                }
+            }
+            if (hasSpecial && hasDigit)
+            {
+                HasNumberAndSpecial = true;
+            }
+            else
+            {
+                HasNumberAndSpecial = false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(NewPassword) && NewPassword == ConfirmPassword)
+            {
+                PasswordsMatch = true;
+            }
+            else
+            {
+                PasswordsMatch = false;
+            }
+
         }
     }
 }
