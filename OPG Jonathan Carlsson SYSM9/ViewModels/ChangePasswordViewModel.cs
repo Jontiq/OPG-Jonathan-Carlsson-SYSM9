@@ -83,6 +83,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         public ICommand GoBackCommand { get; }
+        public ICommand ChangePasswordCommand { get; }
 
         //constructor
         public ChangePasswordViewModel()
@@ -91,6 +92,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
+            ChangePasswordCommand = new RelayCommand(execute => ExecuteUpdatePassword(), canExecute => CanExecuteUpdatePassword());
 
             //Gets the logged in user and sends the user values to designated prop
             LoggedUsername = _userManager.GetLoggedIn().Username;
