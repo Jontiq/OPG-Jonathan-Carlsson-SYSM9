@@ -11,8 +11,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
     //this class is to be used for a "simpler" and cleaner way of navigating between windows
     public class NavigationManager
     {
-        //"T" is for generic type, meaning that the type is decided when using the method. "T" must inherit from "Window", and if it does, create "new" "T".
-        
+        //"T" is for "generic type", meaning that the type is decided when using the method. "T" must inherit from "Window", and if it does, create "new" "T".
+        //"A cup is generic. You can specify it further and say a coffee cup or a tea cup. In other words, Cup<T> can be a Cup<Coffee> or a Cup<Tea>"
+
         //Creates and shows new window
         public void CreateAndShowWindow<T>() where T : Window, new()
         {
