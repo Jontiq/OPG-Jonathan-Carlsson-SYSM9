@@ -46,13 +46,5 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Views
                 viewModel.CheckPasswordRules();
             }
         }
-        //If user presses (X) on the window, they get sent back to the login window.
-        private void WindowClosed(object sender, EventArgs e)
-        {
-            if (DataContext is RegisterWindowViewModel vm)
-            {
-                vm.CancelCommand.Execute(null);
-            }
-        }
     }
 }

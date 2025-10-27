@@ -26,12 +26,5 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Views
             ForgotPasswordWindowViewModel viewModel = new ForgotPasswordWindowViewModel();
             DataContext = viewModel;
         }
-        private void WindowClosed(object sender, EventArgs e)
-        {
-            if (DataContext is ForgotPasswordWindowViewModel vm)
-            {
-                vm.CancelCommand.Execute(null);
-            }
-        }
     }
 }
