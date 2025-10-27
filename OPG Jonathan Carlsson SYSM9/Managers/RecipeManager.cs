@@ -78,8 +78,5 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             }
         }
 
-
-
-
     }
 }

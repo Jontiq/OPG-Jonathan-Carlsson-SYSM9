@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9.Views"
         mc:Ignorable="d"
-        Title="RecipeListWindow" Height="450" Width="800">
+        Title="RecipeListWindow" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
-        <TextBlock Text="You've logged in!"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--HEADLINE-->
+            <TextBlock Text="Recipe List"
+                       HorizontalAlignment="Center"
+                       FontSize="35"
+                       FontWeight="Bold"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="5"/>
+                    <TextBlock VerticalAlignment="Center"
+                           Text="Logged in as: "/>
+                    <!--USERNAME PRESENTATION-->
+                    <TextBlock VerticalAlignment="Center"
+                           Text="USERNAME"/>
+                    <TextBlock VerticalAlignment="Center"
+                           Text=" ("/>
+                    <!--ROLE PRESENTATION-->
+                    <TextBlock VerticalAlignment="Center"
+                           Text="ROLE"/>
+                    <TextBlock VerticalAlignment="Center"
+                           Text=")"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal">
+                    <Rectangle Width="23"/>
+                    <TextBlock VerticalAlignment="Center"
+                           Text="Filter: "/>
+                    <!--FILTER INPUT-->
+                    <TextBox Width="250"
+                             Height="23"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False" 
+                  HeadersVisibility="Column"
+                  CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Recipe Title" Binding="{Binding NO-BE-BINDED}" Width="*" />
+                <DataGridTextColumn Header="Date" Binding="{Binding NO-BE-BINDED}" Width="150" />
+                <DataGridTextColumn Header="Category" Binding="{Binding NO-BE-BINDED}" Width="150" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--GRID TO THE RIGHT-->
+        <Grid Grid.Row="0"
+              Grid.RowSpan="2"
+              Grid.Column="1">
+            <!--BUTTONS-->
+            <StackPanel>
+                <Button Content="Add Recipe"
+                        Margin="5"/>
+                <Button Content="Recipe Details"
+                        Margin="5"/>
+                <Button Content="Remove Recipe"
+                        Margin="5"/>
+                <Rectangle Height="80"/>
+                <Button Content="Cookmaster Info"
+                        Margin="5"/>
+                <Rectangle Height="80"/>
+                <Button Content="Edit User"
+                        Margin="5"/>
+                <Button Content="Sign Out"
+                        Margin="5"/>
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
