@@ -17,7 +17,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         public User CreatedBy { get; set; }
 
         //constructors
-        //for testing if needed
+        //an empty constructor for testing if needed
         public Recipe() { }
 
         public Recipe(string title, List<string> ingredients, string instructions, string category, DateTime date, User createdBy)

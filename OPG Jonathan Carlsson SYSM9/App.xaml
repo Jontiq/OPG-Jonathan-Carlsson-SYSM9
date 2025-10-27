@@ -8,5 +8,6 @@
         <!--UserManager and NavigationManager exists here so that we're able to use the same instance of their classes everywhere in the application-->
         <managers:UserManager x:Key="UserManager"/>
         <managers:NavigationManager x:Key="NavigationManager"/>
+        <managers:RecipeManager x:Key="RecipeManager"/> 
     </Application.Resources>
 </Application>

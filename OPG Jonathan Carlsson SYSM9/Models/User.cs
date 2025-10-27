@@ -15,6 +15,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         public string SecurityQuestion { get; set; }
         public string SecurityAnswer { get; set; }
 
+        //Should i add a boolean for Admin perhaps? whereas Admin == true / false? This may make it easier later?
+
         //constructor
         public User(string username, string password, string country, string securityQuestion, string securityAnswer)
         {
