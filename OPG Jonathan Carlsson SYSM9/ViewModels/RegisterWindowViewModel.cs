@@ -143,7 +143,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //Command props
-        public ICommand CancelCommand { get; }
+        public ICommand GoBackCommand { get; }
         public ICommand RegisterUserCommand { get; }
 
         //constructor
@@ -153,8 +153,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             //LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
             RegisterUserCommand = new RelayCommand(execute => ExecuteCreateUser(), canExecute => CanExecuteCreateUser());
-            CancelCommand = new RelayCommand(execute => ExecuteCancel());
-
+            GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
         }
 
         //methods
@@ -240,7 +239,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //Cancels the registration, opens the LoginWindow and closes the RegisterWindow without saving anything.
-        private void ExecuteCancel()
+        private void ExecuteGoBack()
         {
             _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RegisterWindow>();

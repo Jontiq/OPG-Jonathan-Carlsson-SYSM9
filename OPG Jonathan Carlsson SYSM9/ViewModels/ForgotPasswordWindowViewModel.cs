@@ -79,7 +79,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             }
         }
 
-        public ICommand CancelCommand { get; }
+        public ICommand GoBackCommand { get; }
         public ICommand SubmitCommand { get; }
 
 
@@ -89,12 +89,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             SubmitCommand = new RelayCommand(execute => ExecuteValidationSecurityQuestion(), canExecute => CanExecuteValidation());
-            CancelCommand = new RelayCommand(execute => ExecuteCancel());
+            GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
 
             SecurityQuestion = "Please enter your username!";
         }
         //methods
-        private void ExecuteCancel()
+        private void ExecuteGoBack()
         {
             _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<ForgotPasswordWindow>();
@@ -130,7 +130,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                         //Correct answer
                         if (u.SecurityAnswer == QuestionAnswer)
                         {
-                        //Also logs in the user, making it easier for us to Change user password and such.
+                        //Also logs in the user, making it easier for us to Change user password and such in the ChangePasswordWindow.
                             _userManager.LogIn(UsernameInput, UsernamePassword);
                             _navigationManager.CreateAndShowWindow<ChangePasswordWindow>();
                             _navigationManager.CloseWindow<ForgotPasswordWindow>();
