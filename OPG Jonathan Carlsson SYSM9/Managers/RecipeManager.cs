@@ -20,9 +20,20 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
 
         //methods
         //Adds recipe to Recipes list
-        public void AddRecipe(Recipe r)
+        public void AddRecipe(Recipe recipe)
         {
-            Recipes.Add(r);
+            int highestId = 1;
+
+            //Finds the max id and sets this to nextId+1
+            foreach (Recipe r in Recipes)
+            {
+                if (r.Id > highestId)
+                {
+                    highestId = r.Id;
+                }
+            }
+            recipe.Id = highestId + 1;
+            Recipes.Add(recipe);
         }
 
         //Removes recipe from Recipes list
@@ -52,7 +63,22 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             return userRecipes;
         }
 
-        //Acts as filter, returning the recipes for the searched string.
+        //I will add a filter method here---------------------------------------------------------------------------
+
+        //Looks through all the recipes til it finds a matching ID, and replaces that recipe with the new one.
+        public void UpdateRecipe(Recipe updatedRecipe)
+        {
+            for (int i = 0; i < Recipes.Count; i++)
+            {
+                if (Recipes[i].Id == updatedRecipe.Id)
+                {
+                    Recipes[i] = updatedRecipe;
+                    break;
+                }
+            }
+        }
+
+
 
 
     }

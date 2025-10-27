@@ -9,6 +9,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
     public class Recipe
     {
         //props
+        //Unique ID for each recipe
+        public int Id { get; set; }
         public string Title { get; set; }
         public List<string> Ingredients { get; set; }
         public string Instructions { get; set; }
@@ -20,8 +22,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         //an empty constructor for testing if needed
         public Recipe() { }
 
-        public Recipe(string title, List<string> ingredients, string instructions, string category, DateTime date, User createdBy)
+        public Recipe(int id, string title, List<string> ingredients, string instructions, string category, DateTime date, User createdBy)
         {
+            Id = id;
             Title = title;
             Ingredients = ingredients;
             Instructions = instructions;
