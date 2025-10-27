@@ -159,7 +159,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //methods
         private void ExecuteCreateUser()
         {
-            _userManager.Users.Add(new User(UsernameInput, PasswordInput, SelectedCountry, SelectedQuestion, QuestionAnswer.ToLower()));
+            _userManager.Users.Add(new User(UsernameInput, PasswordInput, SelectedCountry, SelectedQuestion, QuestionAnswer.ToLower(),false));
             MessageBox.Show("New user has been created!");
             _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RegisterWindow>();

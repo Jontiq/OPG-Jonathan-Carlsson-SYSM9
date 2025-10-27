@@ -9,8 +9,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
     public class AdminUser : User
     {
         //Forced constructor because of inheritance, perhaps i should remove from userclass?
-        public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer) 
-            : base(username, password, country, securityQuestion, securityAnswer)
+        public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer, bool isAdmin) 
+            : base(username, password, country, securityQuestion, securityAnswer, isAdmin)
         {
 
         }
