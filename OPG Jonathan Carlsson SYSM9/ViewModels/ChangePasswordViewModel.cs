@@ -50,7 +50,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             //Also logs out the user when the window is closed, just a safety measure.
             _userManager.LogOut();
-            _navigationManager.ShowWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<ChangePasswordWindow>();
 
         }
@@ -59,7 +59,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             //Also logs out the user when the window is closed, just a safety measure.
             _userManager.LogOut();
-            _navigationManager.ShowWindow<ForgotPasswordWindow>();
+            _navigationManager.CreateAndShowWindow<ForgotPasswordWindow>();
             _navigationManager.CloseWindow<ChangePasswordWindow>();
         }
     }

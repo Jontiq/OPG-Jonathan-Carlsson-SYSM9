@@ -84,9 +84,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 
             if (success)
             {
-                _navigationManager.CreateWindow<RecipeListWindow>();
-                _navigationManager.ShowWindow<RecipeListWindow>();
-                _navigationManager.HideWindow<LoginWindow>();
+                _navigationManager.CreateAndShowWindow<RecipeListWindow>();
+                _navigationManager.CloseWindow<LoginWindow>();
             }
             else
             {
@@ -102,16 +101,14 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //Opens RegisterWindow and HIDES LoginWindow
         private void ExecuteRegister()
         {
-            _navigationManager.CreateWindow<RegisterWindow>();
-            _navigationManager.ShowWindow<RegisterWindow>();
-            _navigationManager.HideWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<RegisterWindow>();
+            _navigationManager.CloseWindow<LoginWindow>();
         }
         //Opens ForgotPasswordWindow and HIDES LoginWindow
         private void ExecuteForgotPassword()
         {
-            _navigationManager.CreateWindow<ForgotPasswordWindow>();
-            _navigationManager.ShowWindow<ForgotPasswordWindow>();
-            _navigationManager.HideWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<ForgotPasswordWindow>();
+            _navigationManager.CloseWindow<LoginWindow>();
         }
     }
 }

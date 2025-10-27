@@ -162,7 +162,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _userManager.Users.Add(new User(UsernameInput, PasswordInput, SelectedCountry, SelectedQuestion, QuestionAnswer.ToLower()));
             MessageBox.Show("New user has been created!");
-            _navigationManager.ShowWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RegisterWindow>();
         }
 
@@ -242,7 +242,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //Cancels the registration, opens the LoginWindow and closes the RegisterWindow without saving anything.
         private void ExecuteCancel()
         {
-            _navigationManager.ShowWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RegisterWindow>();
         }
 

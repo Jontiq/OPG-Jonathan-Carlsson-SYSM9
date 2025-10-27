@@ -96,7 +96,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //methods
         private void ExecuteCancel()
         {
-            _navigationManager.ShowWindow<LoginWindow>();
+            _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<ForgotPasswordWindow>();
         }
         //Returns string value if the SecurityQuestion beloning to UsernameInput if the user exists.
@@ -132,9 +132,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                         {
                         //Also logs in the user, making it easier for us to Change user password and such.
                             _userManager.LogIn(UsernameInput, UsernamePassword);
-                            _navigationManager.CreateWindow<ChangePasswordWindow>();
-                            _navigationManager.ShowWindow<ChangePasswordWindow>();
-                            _navigationManager.HideWindow<ForgotPasswordWindow>();
+                            _navigationManager.CreateAndShowWindow<ChangePasswordWindow>();
+                            _navigationManager.CloseWindow<ForgotPasswordWindow>();
                         }
                         //Incorrect Answer
                         else
