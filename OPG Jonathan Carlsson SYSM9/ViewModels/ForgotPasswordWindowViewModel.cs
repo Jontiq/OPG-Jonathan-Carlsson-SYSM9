@@ -88,7 +88,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
-            //LoginCommand = new RelayCommand(execute => ExecuteLogin(), canExecute => CanExecuteLogin());
             SubmitCommand = new RelayCommand(execute => ExecuteValidationSecurityQuestion(), canExecute => CanExecuteValidation());
             CancelCommand = new RelayCommand(execute => ExecuteCancel());
 
@@ -131,11 +130,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                         //Correct answer
                         if (u.SecurityAnswer == QuestionAnswer)
                         {
+                        //Also logs in the user, making it easier for us to Change user password and such.
                             _userManager.LogIn(UsernameInput, UsernamePassword);
                             _navigationManager.CreateWindow<ChangePasswordWindow>();
                             _navigationManager.ShowWindow<ChangePasswordWindow>();
-                            _navigationManager.CloseWindow<ForgotPasswordWindow>();
-                            _navigationManager.HideWindow<LoginWindow>();
+                            _navigationManager.HideWindow<ForgotPasswordWindow>();
                         }
                         //Incorrect Answer
                         else

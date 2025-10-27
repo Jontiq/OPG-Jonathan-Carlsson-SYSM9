@@ -31,6 +31,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         public ICommand CancelCommand { get; }
+        public ICommand GoBackCommand { get; }
 
         //constructor
         public ChangePasswordViewModel()
@@ -39,6 +40,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             CancelCommand = new RelayCommand(execute => ExecuteCancel());
+            GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
 
             //Gets the logged in user and sends the user values to designated prop
             User LoggedInUser = _userManager.GetLoggedIn();
@@ -46,8 +48,19 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
         private void ExecuteCancel()
         {
+            //Also logs out the user when the window is closed, just a safety measure.
+            _userManager.LogOut();
             _navigationManager.ShowWindow<LoginWindow>();
-            _navigationManager.CloseWindow<ForgotPasswordWindow>();
+            _navigationManager.CloseWindow<ChangePasswordWindow>();
+
+        }
+        //If the user presses "Go back", they are "logged out" and returned to the previous page, different from pressing "x" which would be the method "ExecuteCancel"
+        private void ExecuteGoBack()
+        {
+            //Also logs out the user when the window is closed, just a safety measure.
+            _userManager.LogOut();
+            _navigationManager.ShowWindow<ForgotPasswordWindow>();
+            _navigationManager.CloseWindow<ChangePasswordWindow>();
         }
     }
 }
