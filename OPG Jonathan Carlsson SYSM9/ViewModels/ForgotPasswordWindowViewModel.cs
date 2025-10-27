@@ -34,7 +34,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 }
                 else
                 {
-                    SecurityQuestion = FindUserSecurityQuestion();
+                    SecurityQuestion = FindUserSecurityQuestionAndPassword();
                 }
             }
         }
@@ -68,6 +68,16 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string _usernamePassword;
+        public string UsernamePassword
+        {
+            get { return _usernamePassword; }
+            set
+            {
+                _usernamePassword = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand CancelCommand { get; }
         public ICommand SubmitCommand { get; }
@@ -91,13 +101,14 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager.CloseWindow<ForgotPasswordWindow>();
         }
         //Returns string value if the SecurityQuestion beloning to UsernameInput if the user exists.
-        public string FindUserSecurityQuestion()
+        public string FindUserSecurityQuestionAndPassword()
         {
             foreach (User u in _userManager.Users)
             {
                 if (u.Username == UsernameInput)
                 {
                     UserFound = true;
+                    UsernamePassword = u.Password;
                     return u.SecurityQuestion;
                 }
             }
@@ -120,11 +131,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                         //Correct answer
                         if (u.SecurityAnswer == QuestionAnswer)
                         {
+                            _userManager.LogIn(UsernameInput, UsernamePassword);
                             _navigationManager.CreateWindow<ChangePasswordWindow>();
                             _navigationManager.ShowWindow<ChangePasswordWindow>();
                             _navigationManager.CloseWindow<ForgotPasswordWindow>();
                             _navigationManager.HideWindow<LoginWindow>();
-
                         }
                         //Incorrect Answer
                         else
