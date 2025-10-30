@@ -59,13 +59,14 @@
             </Grid>
         </Grid>
         <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding Recipes}"
                   AutoGenerateColumns="False" 
                   HeadersVisibility="Column"
                   CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Recipe Title" Binding="{Binding NO-BE-BINDED}" Width="*" />
-                <DataGridTextColumn Header="Date" Binding="{Binding NO-BE-BINDED}" Width="150" />
-                <DataGridTextColumn Header="Category" Binding="{Binding NO-BE-BINDED}" Width="150" />
+                <DataGridTextColumn Header="Recipe Title" Binding="{Binding Title}" Width="*" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Date,StringFormat='yyyy-MM-dd'}" Width="150" />
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
         <!--GRID TO THE RIGHT-->
