@@ -1,5 +1,7 @@
-﻿using OPG_Jonathan_Carlsson_SYSM9.Managers;
+﻿using MVVM_KlonaMIg.MVVM;
+using OPG_Jonathan_Carlsson_SYSM9.Managers;
 using OPG_Jonathan_Carlsson_SYSM9.Models;
+using OPG_Jonathan_Carlsson_SYSM9.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 {
@@ -15,6 +18,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //props
         private readonly RecipeManager _recipeManager;
         private readonly UserManager _userManager;
+        private readonly NavigationManager _navigationManager;
 
         private User _loggedIn;
         public User LoggedIn
@@ -54,12 +58,16 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //Will store the observable recipes for the specific logged in user OR all if they have an Admin role.
         public ObservableCollection<Recipe> Recipes { get; set; }
 
+        public ICommand LogoutCommand { get; }
+
         //Constructor
 
         public RecipeListWindowViewModel()
         {
             _recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"];
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
+            _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
+            LogoutCommand = new RelayCommand(execute => ExecuteLogout());
 
             //Stores who's logged in into LoggedIn
             LoggedIn = _userManager.GetLoggedIn();
@@ -79,6 +87,13 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             {
                 Recipes = new ObservableCollection<Recipe>(_recipeManager.GetByUser(LoggedIn.Id));
             }
+        }
+
+        private void ExecuteLogout()
+        {
+            _userManager.LogOut();
+            _navigationManager.CreateAndShowWindow<LoginWindow>();
+            _navigationManager.CloseWindow<RecipeListWindow>();
         }
     }
 }

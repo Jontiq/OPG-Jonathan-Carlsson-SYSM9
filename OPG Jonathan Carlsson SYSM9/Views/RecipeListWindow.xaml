@@ -93,6 +93,7 @@
                 <Button Content="Edit User"
                         Margin="5"/>
                 <Button Content="Sign Out"
+                        Command="{Binding LogoutCommand}"
                         Margin="5"/>
 
             </StackPanel>
