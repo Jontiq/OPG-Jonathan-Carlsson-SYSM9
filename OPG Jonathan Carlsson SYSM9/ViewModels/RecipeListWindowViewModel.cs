@@ -27,6 +27,30 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             }
         }
 
+        public string LoggedInUsername
+        {
+            get { return LoggedIn.Username; }
+        }
+
+        public string LoggedInRole
+        {
+            get
+            {
+                if (LoggedIn.IsAdmin)
+                {
+                    return "ADMIN";
+                }
+                else
+                {
+                    return "USER";
+                }
+            }
+        }
+        public int LoggedInID
+        {
+            get { return LoggedIn.Id; }
+        }
+
         //Will store the observable recipes for the specific logged in user OR all if they have an Admin role.
         public ObservableCollection<Recipe> Recipes { get; set; }
 
@@ -43,8 +67,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 
         }
 
-        //Sends the recipes to the ObservableCollection Recipes. If the user is Admin, then all recipes are loaded.
-        //Otherwise, only the recipes created by the user is shown.
+        //Sends the recipes created by the logged in user to the ObservableCollection Recipes.
+        //If the user is Admin, then all recipes are loaded.
         private void LoadRecipes()
         {
             if (LoggedIn.IsAdmin)
