@@ -21,9 +21,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         public UserManager()
         {
             //"normal" user
-            _users.Add(new User("user", "password", "sweden", "write 'answer' in the answer field", "answer", false));
+            _users.Add(new User(1,"user", "password", "sweden", "write 'answer' in the answer field", "answer", false));
             //"admin" user
-            _users.Add(new AdminUser("admin", "password", "sweden", "write 'answer' in the answer field", "answer",true));
+            _users.Add(new AdminUser(2,"admin", "password", "sweden", "write 'answer' in the answer field", "answer",true));
         }
 
         //Allowes user to log in if username and password match, and returns boolean value "TRUE".
@@ -56,5 +56,30 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         {
             LoggedIn.Password = newPassword;
         }
+
+        //Creates and adds a new user
+        public void CreateUser(string username, string password, string country, string question, string answer, bool isAdmin)
+        {
+            //Finds the currently highest user ID
+            int highestId = 0;
+
+            foreach (User u in _users)
+            {
+                if (u.Id > highestId)
+                {
+                    highestId = u.Id;
+                }
+            }
+            //Sets the ID to be 1+ higher than the highest id
+            int newId = highestId + 1;
+
+            //Creates the user with the new id
+            User newUser = new User(newId, username, password, country, question, answer.ToLower(), isAdmin);
+
+            //adds it to the users
+            _users.Add(newUser);
+        }
+
+
     }
 }
