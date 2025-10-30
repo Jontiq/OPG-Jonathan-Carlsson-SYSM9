@@ -208,7 +208,7 @@
             </TextBlock>
         </StackPanel>
 
-        <!--"CANCEL" AND "SAVE" BUTTON-->
+        <!--"GOBACK" AND "SAVE" BUTTON-->
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

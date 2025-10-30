@@ -2,6 +2,7 @@
 using OPG_Jonathan_Carlsson_SYSM9.Managers;
 using OPG_Jonathan_Carlsson_SYSM9.Models;
 using OPG_Jonathan_Carlsson_SYSM9.Views;
+using OPG_Jonathan_Carlsson_SYSM9.Views.RecipeWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,7 +59,10 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //Will store the observable recipes for the specific logged in user OR all if they have an Admin role.
         public ObservableCollection<Recipe> Recipes { get; set; }
 
+        //Lets the user Logout
         public ICommand LogoutCommand { get; }
+        //Opens "AddRecipeWindow"
+        public ICommand AddRecipeButtonCommand { get; }
 
         //Constructor
 
@@ -68,6 +72,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _userManager = (UserManager)Application.Current.Resources["UserManager"];
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             LogoutCommand = new RelayCommand(execute => ExecuteLogout());
+            AddRecipeButtonCommand = new RelayCommand(execute => ExecuteAddNewRecipeButton());
 
             //Stores who's logged in into LoggedIn
             LoggedIn = _userManager.GetLoggedIn();
@@ -93,6 +98,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _userManager.LogOut();
             _navigationManager.CreateAndShowWindow<LoginWindow>();
+            _navigationManager.CloseWindow<RecipeListWindow>();
+        }
+        private void ExecuteAddNewRecipeButton()
+        {
+            _navigationManager.CreateAndShowWindow<AddRecipeWindow>();
             _navigationManager.CloseWindow<RecipeListWindow>();
         }
     }

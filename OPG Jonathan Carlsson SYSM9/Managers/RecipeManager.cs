@@ -24,7 +24,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             AddRecipe(new Recipe(
                 0,
                 "Spaghetti Bolognese",
-                new List<string> { "Spaghetti", "Minced meat", "Tomato sauce", "Onion", "Garlic" },
+                "Spaghetti, Minced meat, Tomato sauce, Onion, Garlic",
                 "1. Boil spaghetti\n2. Fry the minced meat\n3. Mix EVERYTHING else and serve :)",
                 "Dinner",
                 new DateTime(2025, 10, 30),
@@ -33,7 +33,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             AddRecipe(new Recipe(
                 0,
                 "Pancakes",
-                new List<string> { "Milk", "Eggs", "Flour" },
+                "Milk, Eggs, Flour",
                 "Mix and fry.",
                 "Breakfast",
                 DateTime.Now,
@@ -54,6 +54,13 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
                     highestId = r.Id;
                 }
             }
+            //If the date is "default" the current date is taken. Otherwise it is the input. 
+            //I've done this only because i have added a certain date to the "pre-made" recipes.
+            if (recipe.Date == default(DateTime))
+            {
+                recipe.Date = DateTime.Now;
+            }
+
             recipe.Id = highestId + 1;
             Recipes.Add(recipe);
         }

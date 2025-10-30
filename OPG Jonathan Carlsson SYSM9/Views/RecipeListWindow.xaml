@@ -81,6 +81,7 @@
             <!--BUTTONS-->
             <StackPanel>
                 <Button Content="Add Recipe"
+                        Command="{Binding AddRecipeButtonCommand}"
                         Margin="5"/>
                 <Button Content="Recipe Details"
                         Margin="5"/>
