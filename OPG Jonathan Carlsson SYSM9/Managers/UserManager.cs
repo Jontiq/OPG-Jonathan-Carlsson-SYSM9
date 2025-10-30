@@ -51,6 +51,20 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             return LoggedIn;
         }
 
+        //Finds and returns a user by their ID
+        public User GetUserById(int id)
+        {
+            foreach (User u in _users)
+            {
+                if (u.Id == id)
+                {
+                    return u;
+                }
+            }
+            //Returns null if no user with that ID exists, but this should never happen (we'll see)
+            return null;
+        }
+
         //Changes the password for the logged in user
         public void ChangePassword(string newPassword)
         {
@@ -79,7 +93,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             //adds it to the users
             _users.Add(newUser);
         }
-
-
     }
+
 }
+
+
+

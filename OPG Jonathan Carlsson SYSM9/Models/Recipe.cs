@@ -16,13 +16,11 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         public string Instructions { get; set; }
         public string Category { get; set; }
         public DateTime Date { get; set; }
-        public User CreatedBy { get; set; }
+        public int CreatedByID { get; set; }
 
         //constructors
-        //an empty constructor for testing if needed
-        public Recipe() { }
 
-        public Recipe(int id, string title, List<string> ingredients, string instructions, string category, DateTime date, User createdBy)
+        public Recipe(int id, string title, List<string> ingredients, string instructions, string category, DateTime date, int createdByID)
         {
             Id = id;
             Title = title;
@@ -30,7 +28,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
             Instructions = instructions;
             Category = category;
             Date = date;
-            CreatedBy = createdBy;
+            CreatedByID = createdByID;
         }
 
         //methods (commands i guess later)
