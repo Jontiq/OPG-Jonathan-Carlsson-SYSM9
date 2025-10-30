@@ -9,6 +9,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
     public class User
     {
         //props
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Country { get; set; }
@@ -19,8 +20,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Models
         //Should i add a boolean for Admin perhaps? whereas Admin == true / false? This may make it easier later?
 
         //constructor
-        public User(string username, string password, string country, string securityQuestion, string securityAnswer, bool isAdmin)
+        public User(int id, string username, string password, string country, string securityQuestion, string securityAnswer, bool isAdmin)
         {
+            Id = id;
             Username = username;
             Password = password;
             Country = country;
