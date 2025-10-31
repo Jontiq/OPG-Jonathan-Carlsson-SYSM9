@@ -55,6 +55,18 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             get { return LoggedIn.Id; }
         }
+        private Recipe _selectedRecipe;
+
+        public Recipe SelectedRecipe
+        {
+            get { return _selectedRecipe; }
+            set 
+            {
+                _selectedRecipe = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         //Will store the observable recipes for the specific logged in user OR all if they have an Admin role.
         public ObservableCollection<Recipe> Recipes { get; set; }
@@ -63,6 +75,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public ICommand LogoutCommand { get; }
         //Opens "AddRecipeWindow"
         public ICommand AddRecipeButtonCommand { get; }
+        //Opens "RecipeDetailsWindow"
+        public ICommand RecipeDetailsButton { get; }
 
         //Constructor
 
@@ -73,6 +87,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             LogoutCommand = new RelayCommand(execute => ExecuteLogout());
             AddRecipeButtonCommand = new RelayCommand(execute => ExecuteAddNewRecipeButton());
+            RecipeDetailsButton = new RelayCommand(execute => ExecuteRecipeDetailsButton(), canExecute => CanExecuteRecipeDetailsButton());
 
             //Stores who's logged in into LoggedIn
             LoggedIn = _userManager.GetLoggedIn();
@@ -94,16 +109,39 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             }
         }
 
+        //Lets the user logout and return to the login window
         private void ExecuteLogout()
         {
             _userManager.LogOut();
             _navigationManager.CreateAndShowWindow<LoginWindow>();
             _navigationManager.CloseWindow<RecipeListWindow>();
         }
+        //Lets the user enter the AddNewRecipe window
         private void ExecuteAddNewRecipeButton()
         {
             _navigationManager.CreateAndShowWindow<AddRecipeWindow>();
             _navigationManager.CloseWindow<RecipeListWindow>();
+        }
+
+        //Lets the user enter RecipeDetailsWindow, and also sends the selected recipe to a universal prop containing the selected recipe
+        private void ExecuteRecipeDetailsButton()
+        {
+            _recipeManager.SelectedRecipe = SelectedRecipe;
+            _navigationManager.CreateAndShowWindow<RecipeDetailsWindow>();
+            _navigationManager.CloseWindow<RecipeListWindow>();
+        }
+
+        //Checks if the user is allowed to click "Recipe details".
+        private bool CanExecuteRecipeDetailsButton()
+        {
+            if (SelectedRecipe != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

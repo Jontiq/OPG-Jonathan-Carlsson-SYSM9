@@ -65,6 +65,7 @@
         </Grid>
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding Recipes}"
+                  SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
                   HeadersVisibility="Column"
                   CanUserAddRows="False"
@@ -85,6 +86,7 @@
                         Command="{Binding AddRecipeButtonCommand}"
                         Margin="5"/>
                 <Button Content="Recipe Details"
+                        Command="{Binding RecipeDetailsButton}"
                         Margin="5"/>
                 <Button Content="Remove Recipe"
                         Margin="5"/>

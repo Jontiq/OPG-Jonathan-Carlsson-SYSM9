@@ -16,6 +16,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
         {
             get { return _recipes; }
         }
+        public Recipe SelectedRecipe { get; set; }
 
         //constructor (here i'll add the recipes supposed to be created when launching the program later
         public RecipeManager()
