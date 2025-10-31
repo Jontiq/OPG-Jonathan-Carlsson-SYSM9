@@ -113,6 +113,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
         public ICommand GoBackCommand { get; }
         //Activates the edit-possibilities
         public ICommand EditCommand { get; }
+        //Allowes the user to save the recipe
+        public ICommand SaveCommand { get; }
 
         //constructor
         public RecipeDetailsViewModel()
@@ -124,7 +126,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             IsReadOnly = true;
 
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
-            EditCommand = new RelayCommand(execute => ExecuteEdit());
+            EditCommand = new RelayCommand(execute => ExecuteEdit(), canExecute => CanExecuteEdit());
+            SaveCommand = new RelayCommand(execute => ExecuteSaveRecipeChanges());
 
 
             //Assigns the values from the SelectedRecipe in _recipeManager
@@ -158,6 +161,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
                 if (result == MessageBoxResult.Yes)
                 {
                     //HERE THE CHANGES WILL BE SAVED, I JUST NEED TO WRITE THE METHOD FOR SAVING
+                    ExecuteSaveRecipeChanges();
                     _recipeManager.SelectedRecipe = null;
                     _navigationManager.CreateAndShowWindow<RecipeListWindow>();
                     _navigationManager.CloseWindow<RecipeDetailsWindow>();
@@ -182,6 +186,42 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             {
                 IsReadOnly = false;
             }
+        }
+
+        public bool CanExecuteEdit()
+        {
+            if (!IsReadOnly)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ExecuteSaveRecipeChanges()
+        {
+            //Create a new recipe with the same ID as the selectedrecipe ID
+            Recipe updatedRecipe = new Recipe(
+                _recipeManager.SelectedRecipe.Id,
+                Title,
+                Ingredients,
+                Instructions,
+                Category,
+                //Keps the old date and the createdByID.
+                _recipeManager.SelectedRecipe.Date,
+                _recipeManager.SelectedRecipe.CreatedByID
+            );
+
+            //Calls the "UpdateRecipe" method from RecipeManager and updates the recipe
+            _recipeManager.UpdateRecipe(updatedRecipe);
+
+            //Now the selectedRecipe is the updated one (just in case :) )
+            _recipeManager.SelectedRecipe = updatedRecipe;
+
+            //Locks field, so that the user needs to click "edit" to onlock again
+            IsReadOnly = true;
+            //feedback :)
+            MessageBox.Show("Changes saved successfully!", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
