@@ -96,6 +96,23 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
 
         }
 
+        //Constructor for a copied recipe
+        public AddRecipeViewModel(string title, string ingredients, string instructions, string selectedCategory)
+        {
+            _recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"];
+            _userManager = (UserManager)Application.Current.Resources["UserManager"];
+            _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
+
+            AddNewRecipeCommand = new RelayCommand(execute => ExecuteNewRecipe(), canExecute => CanExecuteNewRecipe());
+            GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
+
+            //Assigns the values from the copied recipe
+            Title = title;
+            Ingredients = ingredients;
+            Instructions = instructions;
+            SelectedCategory = selectedCategory;
+        }
+
         //Adds new recipe
         private void ExecuteNewRecipe()
         {

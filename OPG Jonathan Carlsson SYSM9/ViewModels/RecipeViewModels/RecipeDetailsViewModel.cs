@@ -115,6 +115,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
         public ICommand EditCommand { get; }
         //Allowes the user to save the recipe
         public ICommand SaveCommand { get; }
+        //Allowes the user to copy the recipe
+        public ICommand CopyCommand { get; }
 
         //constructor
         public RecipeDetailsViewModel()
@@ -128,6 +130,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
             EditCommand = new RelayCommand(execute => ExecuteEdit(), canExecute => CanExecuteEdit());
             SaveCommand = new RelayCommand(execute => ExecuteSaveRecipeChanges());
+            CopyCommand = new RelayCommand(execute => ExecuteCopyRecipe(), canExecute => CanExecuteEdit());
 
 
             //Assigns the values from the SelectedRecipe in _recipeManager
@@ -142,9 +145,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
 
         //methods
 
+        //Lets the user return to the recipe list window
         private void ExecuteGoBack()
         {
-
             if (!IsReadOnly)
             {
                 MessageBoxResult result = MessageBox.Show(
@@ -172,7 +175,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             _navigationManager.CreateAndShowWindow<RecipeListWindow>();
             _navigationManager.CloseWindow<RecipeDetailsWindow>();
         }
-
+        //Activated editable fields
         public void ExecuteEdit()
         {
             MessageBoxResult result = MessageBox.Show(
@@ -197,7 +200,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
 
             return true;
         }
-
+        //Saves the recipe in it's current condition
         private void ExecuteSaveRecipeChanges()
         {
             //Create a new recipe with the same ID as the selectedrecipe ID
@@ -222,6 +225,27 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             IsReadOnly = true;
             //feedback :)
             MessageBox.Show("Changes saved successfully!", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ExecuteCopyRecipe()
+        {
+            //Creates a new AddRecipeWindow
+            AddRecipeWindow copyWindow = new AddRecipeWindow();
+
+            //Creates a new ViewModel, with the exact same props as the selected item
+            AddRecipeViewModel copyViewModel = new AddRecipeViewModel(
+                Title,
+                Ingredients,
+                Instructions,
+                Category
+            );
+
+            //"Connects" them, as we do in code-behind usually
+            copyWindow.DataContext = copyViewModel;
+
+            //Shows the copied window
+            copyWindow.Show();
+            _navigationManager.CloseWindow<RecipeDetailsWindow>();
         }
 
 
