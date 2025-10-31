@@ -77,6 +77,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public ICommand AddRecipeButtonCommand { get; }
         //Opens "RecipeDetailsWindow"
         public ICommand RecipeDetailsButton { get; }
+        //Opens the information window
+        public ICommand InformationCommand { get; }
 
         //Constructor
 
@@ -88,6 +90,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             LogoutCommand = new RelayCommand(execute => ExecuteLogout());
             AddRecipeButtonCommand = new RelayCommand(execute => ExecuteAddNewRecipeButton());
             RecipeDetailsButton = new RelayCommand(execute => ExecuteRecipeDetailsButton(), canExecute => CanExecuteRecipeDetailsButton());
+            InformationCommand = new RelayCommand(execute => ExecuteInformation());
 
             //Stores who's logged in into LoggedIn
             LoggedIn = _userManager.GetLoggedIn();
@@ -142,6 +145,12 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             {
                 return false;
             }
+        }
+
+        private void ExecuteInformation()
+        {
+            _navigationManager.CreateAndShowWindow<InfoWindow>();
+            _navigationManager.CloseWindow<RecipeListWindow>();
         }
     }
 }

@@ -92,6 +92,7 @@
                         Margin="5"/>
                 <Rectangle Height="80"/>
                 <Button Content="Cookmaster Info"
+                        Command="{Binding InformationCommand}"
                         Margin="5"/>
                 <Rectangle Height="80"/>
                 <Button Content="Edit User"
