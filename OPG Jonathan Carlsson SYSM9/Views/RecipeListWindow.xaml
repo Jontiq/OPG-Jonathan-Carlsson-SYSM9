@@ -67,7 +67,8 @@
                   ItemsSource="{Binding Recipes}"
                   AutoGenerateColumns="False" 
                   HeadersVisibility="Column"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Recipe Title" Binding="{Binding Title}" Width="*" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Date,StringFormat='yyyy-MM-dd'}" Width="150" />

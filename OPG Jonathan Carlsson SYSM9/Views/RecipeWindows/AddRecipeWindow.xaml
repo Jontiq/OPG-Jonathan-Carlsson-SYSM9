@@ -68,7 +68,10 @@
                      VerticalAlignment="Center"
                      Height="100"
                      FontSize="15"
-                     Margin="5"/>
+                     Margin="5"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <!--INGREDIENTS-->
         <Grid Grid.Row="4">
@@ -79,7 +82,7 @@
 
             <TextBlock Text="Ingredients:"
                HorizontalAlignment="Right"
-               VerticalAlignment="Top"
+               VerticalAlignment="Center"
                FontSize="15"
                Margin="5"/>
 
