@@ -37,7 +37,7 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
-                     IsReadOnly="True"/>
+                     IsReadOnly="{Binding IsReadOnly}"/>
         </Grid>
         <!--CATEGORY-->
         <Grid Grid.Row="2">
@@ -55,7 +55,7 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
-                     IsReadOnly="True"/>
+                     IsReadOnly="{Binding IsReadOnly}"/>
         </Grid>
         <!--INSTRUCTIONS-->
         <Grid Grid.Row="3">
@@ -74,7 +74,7 @@
                      FontSize="15"
                      Margin="5"
                      Height="100"
-                     IsReadOnly="True"/>
+                     IsReadOnly="{Binding IsReadOnly}"/>
         </Grid>
         <!--INGREDIENTS-->
         <Grid Grid.Row="4">
@@ -93,7 +93,7 @@
                      FontSize="15"
                      Margin="5"
                      Height="100"
-                     IsReadOnly="True"/>
+                     IsReadOnly="{Binding IsReadOnly}"/>
         </Grid>
         <!--CREATED BY AND DATE-->
         <Grid Grid.Row="5">
@@ -140,10 +140,12 @@
             </Grid.ColumnDefinitions>
             <!--GOBACK-->
             <Button Content="Go Back"
+                    Command="{Binding GoBackCommand}"
                     Margin="10"
                     Width="150"/>
             <!--EDIT-->
             <Button Content="Edit"
+                    Command="{Binding EditCommand}"
                     Grid.Column="1"
                     Margin="10"
                     Width="150"/>
