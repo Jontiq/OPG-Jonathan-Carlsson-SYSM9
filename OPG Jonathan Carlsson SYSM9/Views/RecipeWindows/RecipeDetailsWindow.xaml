@@ -33,7 +33,7 @@
                        FontSize="15"/>
             <!--BIND TO TITLE-->
             <TextBox Grid.Column="1"
-                     Text="Bajsmackan"
+                     Text="{Binding Title,Mode=TwoWay}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -51,7 +51,7 @@
                 FontSize="15"/>
             <!--BIND TO CATEGORY-->
             <TextBox Grid.Column="1"
-                     Text="Breakfast"
+                     Text="{Binding Category,Mode=TwoWay}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -67,9 +67,9 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        FontSize="15"/>
-            <!--BIND TO CATEGORY-->
+            <!--BIND TO INSTRUCTIONS-->
             <TextBox Grid.Column="1"
-                     Text="Do this, then that!"
+                     Text="{Binding Instructions,Mode=TwoWay}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -86,9 +86,9 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        FontSize="15"/>
-            <!--BIND TO CATEGORY-->
+            <!--BIND TO INGREDIENTS-->
             <TextBox Grid.Column="1"
-                     Text="Milk, onion"
+                     Text="{Binding Ingredients,Mode=TwoWay}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -112,7 +112,7 @@
                        FontSize="15"/>
             <!--BIND TO USERNAME-->
             <TextBlock Grid.Column="1"
-                       Text="USERNAME"
+                       Text="{Binding CreatedByUsername,Mode=TwoWay}"
                        VerticalAlignment="Center"
                        FontSize="15"
                        Margin="5"/>
@@ -126,7 +126,7 @@
             <!--BIND TO DATE-->
             <TextBlock Grid.Column="1"
                        Grid.Row="1"
-                       Text="YYYY-MM-DD"
+                       Text="{Binding CreationDate,Mode=TwoWay}"
                        VerticalAlignment="Center"
                        FontSize="15"
                        Margin="5"/>
