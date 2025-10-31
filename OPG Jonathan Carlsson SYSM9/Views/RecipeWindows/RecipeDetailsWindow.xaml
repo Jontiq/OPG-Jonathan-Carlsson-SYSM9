@@ -11,10 +11,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.2*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Recipe Details"
                    HorizontalAlignment="Center"
@@ -73,6 +73,7 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
+                     Height="100"
                      IsReadOnly="True"/>
         </Grid>
         <!--INGREDIENTS-->
@@ -91,6 +92,7 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
+                     Height="100"
                      IsReadOnly="True"/>
         </Grid>
         <!--CREATED BY AND DATE-->
@@ -129,6 +131,27 @@
                        FontSize="15"
                        Margin="5"/>
         </Grid>
-        
+        <!--BUTTONS-->
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--GOBACK-->
+            <Button Content="Go Back"
+                    Margin="10"
+                    Width="150"/>
+            <!--EDIT-->
+            <Button Content="Edit"
+                    Grid.Column="1"
+                    Margin="10"
+                    Width="150"/>
+            <!--SAVE-->
+            <Button Content="Save"
+                    Grid.Column="2"
+                    Margin="10"
+                    Width="150"/>
+        </Grid>
     </Grid>
 </Window>
