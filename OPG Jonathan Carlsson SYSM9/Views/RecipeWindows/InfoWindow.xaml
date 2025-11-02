@@ -89,6 +89,5 @@ Discover, cook and enjoy, all in CookMaster!"
                 Content="Thanks for the info!"
                 FontSize="13"
                 Margin=" 18"/>
-        
     </Grid>
 </Window>

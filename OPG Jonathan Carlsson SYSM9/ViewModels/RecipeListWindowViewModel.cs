@@ -79,6 +79,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public ICommand RecipeDetailsButton { get; }
         //Opens the information window
         public ICommand InformationCommand { get; }
+        //Lets the user remove a selected recipe
+        public ICommand DeleteRecipeCommand { get; }
 
         //Constructor
 
@@ -89,8 +91,9 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             _navigationManager = (NavigationManager)Application.Current.Resources["NavigationManager"];
             LogoutCommand = new RelayCommand(execute => ExecuteLogout());
             AddRecipeButtonCommand = new RelayCommand(execute => ExecuteAddNewRecipeButton());
-            RecipeDetailsButton = new RelayCommand(execute => ExecuteRecipeDetailsButton(), canExecute => CanExecuteRecipeDetailsButton());
+            RecipeDetailsButton = new RelayCommand(execute => ExecuteRecipeDetailsButton(), canExecute => RecipeSelected());
             InformationCommand = new RelayCommand(execute => ExecuteInformation());
+            DeleteRecipeCommand = new RelayCommand(execute => ExecuteRemoveRecipe(), canExecute => RecipeSelected());
 
             //Stores who's logged in into LoggedIn
             LoggedIn = _userManager.GetLoggedIn();
@@ -135,7 +138,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //Checks if the user is allowed to click "Recipe details".
-        private bool CanExecuteRecipeDetailsButton()
+        private bool RecipeSelected()
         {
             if (SelectedRecipe != null)
             {
@@ -146,11 +149,33 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 return false;
             }
         }
-
+        //Lets the user open the cookmaster information windwow
         private void ExecuteInformation()
         {
             _navigationManager.CreateAndShowWindow<InfoWindow>();
             _navigationManager.CloseWindow<RecipeListWindow>();
+        }
+
+        //Removes recipe
+        private void ExecuteRemoveRecipe()
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this recipe?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            //Removes the recipe bu the recipe ID reference from the Recipe list in RecipeManager and in the datagrid view.
+            if (result == MessageBoxResult.Yes)
+            {
+                //Removes the selected recipe from Recipes list in RecipeManager using the Recipe ID.
+                for (int i = 0; i < _recipeManager.Recipes.Count; i++)
+                {
+                    if (_recipeManager.Recipes[i].Id == SelectedRecipe.Id)
+                    {
+                        _recipeManager.Recipes.RemoveAt(i);
+                        break;
+                    }
+                }
+                //Removes is from the datagrid (AKA Recipes in this class)
+                Recipes.Remove(SelectedRecipe);
+            }
         }
     }
 }

@@ -89,6 +89,7 @@
                         Command="{Binding RecipeDetailsButton}"
                         Margin="5"/>
                 <Button Content="Remove Recipe"
+                        Command="{Binding DeleteRecipeCommand}"
                         Margin="5"/>
                 <Rectangle Height="80"/>
                 <Button Content="Cookmaster Info"
