@@ -91,6 +91,7 @@
             
             <!--BUTTONS-->
             <Button Content="Go Back"
+                    Command="{Binding GoBackCommand}"
                     Margin="8"/>
             <Button Content="Edit User"
                     Grid.Column="1"
