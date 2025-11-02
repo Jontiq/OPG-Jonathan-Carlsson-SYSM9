@@ -39,18 +39,6 @@
                     <!--USERNAME PRESENTATION-->
                     <TextBlock VerticalAlignment="Center"
                            Text="{Binding LoggedInUsername}"/>
-                    <TextBlock VerticalAlignment="Center"
-                           Text=" ("/>
-                    <!--ROLE PRESENTATION-->
-                    <TextBlock VerticalAlignment="Center"
-                           Text="{Binding LoggedInRole}"/>
-                    <TextBlock VerticalAlignment="Center"
-                           Text=")"/>
-                    <TextBlock VerticalAlignment="Center"
-                               Text=" ID: "/>
-                    <!--ID PRESENTATION-->
-                    <TextBlock VerticalAlignment="Center"
-                               Text="{Binding LoggedInID}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal">

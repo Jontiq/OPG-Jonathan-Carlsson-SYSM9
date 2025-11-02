@@ -36,25 +36,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             get { return LoggedIn.Username; }
         }
-
-        public string LoggedInRole
-        {
-            get
-            {
-                if (LoggedIn.IsAdmin)
-                {
-                    return "ADMIN";
-                }
-                else
-                {
-                    return "USER";
-                }
-            }
-        }
-        public int LoggedInID
-        {
-            get { return LoggedIn.Id; }
-        }
         private Recipe _selectedRecipe;
 
         public Recipe SelectedRecipe
