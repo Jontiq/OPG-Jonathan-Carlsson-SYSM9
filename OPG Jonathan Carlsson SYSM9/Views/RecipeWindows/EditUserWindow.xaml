@@ -1,11 +1,11 @@
-﻿<Window x:Class="OPG_Jonathan_Carlsson_SYSM9.Views.RegisterWindow"
+﻿<Window x:Class="OPG_Jonathan_Carlsson_SYSM9.Views.RecipeWindows.EditUserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9.Views"
+        xmlns:local="clr-namespace:OPG_Jonathan_Carlsson_SYSM9.Views.RecipeWindows"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="400" Width="510" ResizeMode="NoResize">
+        Title="EditUserWindow" Height="400" Width="510" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -13,12 +13,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1.2*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Register"
+        <TextBlock Text="Edit User"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    FontSize="20"
@@ -42,24 +40,13 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"/>
-            <!--USERNAME IS TAKEN TEXTBLOCK-->
-            <TextBlock Text="Username is not available!"
+            <!--USERNAME IS TAKEN OR MINIMUM 4 CHARACTERS, OR BOTH!-->
+            <TextBlock Text="ERRORMESSAGE"
                        Grid.Row="1"
                        Grid.Column="1"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Foreground="Red">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility"
-                                Value="Hidden"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding UsernameTaken}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
             </TextBlock>
         </Grid>
         <!--COUNTRY-->
@@ -79,42 +66,8 @@
                       FontSize="15"
                       Margin="5"/>
         </Grid>
-        <!--SECURITY QUESTION-->
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2.5*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Security Question: "
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       FontSize="15"/>
-            <ComboBox Grid.Column="1"
-                      ItemsSource="{Binding Questions}"
-                      SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      VerticalAlignment="Center"
-                      FontSize="15"
-                      Margin="5"/>
-        </Grid>
-        <!--SECURITY ANSWER-->
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2.5*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Answer: "
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                FontSize="15"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding QuestionAnswer,UpdateSourceTrigger=PropertyChanged}"
-                     VerticalAlignment="Center"
-                     FontSize="15"
-                     Margin="5"/>
-        </Grid>
-        
         <!--PASSWORD-->
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2.5*"/>
@@ -131,7 +84,7 @@
                          Margin="5"/>
         </Grid>
         <!--CONFIRM PASSWORD-->
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2.5*"/>
@@ -148,7 +101,7 @@
                          Margin="5"/>
         </Grid>
         <!--PASSWORD REQUIREMENTS-->
-        <StackPanel Grid.Row="7"
+        <StackPanel Grid.Row="5"
                     VerticalAlignment="Center">
             <TextBlock Grid.Row="5"
                        Text="Password Requirements: "
@@ -172,7 +125,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            
+
             <TextBlock Text="At least one number and one special character"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
@@ -208,7 +161,7 @@
         </StackPanel>
 
         <!--"GOBACK" AND "SAVE" BUTTON-->
-        <Grid Grid.Row="8">
+        <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
