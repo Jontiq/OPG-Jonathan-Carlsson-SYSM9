@@ -60,7 +60,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public Recipe SelectedRecipe
         {
             get { return _selectedRecipe; }
-            set 
+            set
             {
                 _selectedRecipe = value;
                 OnPropertyChanged();
@@ -79,6 +79,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         public ICommand RecipeDetailsButton { get; }
         //Opens the information window
         public ICommand InformationCommand { get; }
+        //Opens the user details window
+        public ICommand UserDetailsCommand { get; }
         //Lets the user remove a selected recipe
         public ICommand DeleteRecipeCommand { get; }
 
@@ -93,6 +95,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             AddRecipeButtonCommand = new RelayCommand(execute => ExecuteAddNewRecipeButton());
             RecipeDetailsButton = new RelayCommand(execute => ExecuteRecipeDetailsButton(), canExecute => RecipeSelected());
             InformationCommand = new RelayCommand(execute => ExecuteInformation());
+            UserDetailsCommand = new RelayCommand(execute => ExecuteUserDetails());
             DeleteRecipeCommand = new RelayCommand(execute => ExecuteRemoveRecipe(), canExecute => RecipeSelected());
 
             //Stores who's logged in into LoggedIn
@@ -176,6 +179,14 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 //Removes recipe from the datagrid (AKA Recipes in this class)
                 Recipes.Remove(SelectedRecipe);
             }
+        }
+
+        //Opens "User details"
+
+        public void ExecuteUserDetails()
+        {
+            _navigationManager.CreateAndShowWindow<UserDetailsWindow>();
+            _navigationManager.CloseWindow<RecipeListWindow>();
         }
     }
 }
