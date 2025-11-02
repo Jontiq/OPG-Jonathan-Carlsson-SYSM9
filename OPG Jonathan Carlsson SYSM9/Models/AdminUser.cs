@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OPG_Jonathan_Carlsson_SYSM9.Models
 {
+    //I might remove this whole class
     public class AdminUser : User
     {
         //Forced constructor because of inheritance, perhaps i should remove from userclass?

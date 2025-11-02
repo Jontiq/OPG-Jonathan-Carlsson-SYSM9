@@ -173,7 +173,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                         break;
                     }
                 }
-                //Removes is from the datagrid (AKA Recipes in this class)
+                //Removes recipe from the datagrid (AKA Recipes in this class)
                 Recipes.Remove(SelectedRecipe);
             }
         }

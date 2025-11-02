@@ -96,7 +96,7 @@
                         Command="{Binding InformationCommand}"
                         Margin="5"/>
                 <Rectangle Height="80"/>
-                <Button Content="Edit User"
+                <Button Content="User Details"
                         Margin="5"/>
                 <Button Content="Sign Out"
                         Command="{Binding LogoutCommand}"
