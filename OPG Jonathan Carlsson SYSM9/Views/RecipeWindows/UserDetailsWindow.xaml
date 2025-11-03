@@ -94,6 +94,7 @@
                     Command="{Binding GoBackCommand}"
                     Margin="8"/>
             <Button Content="Edit User"
+                    Command="{Binding EditUserCommand}"
                     Grid.Column="1"
                     Margin="8"/>
         </Grid>

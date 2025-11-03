@@ -68,6 +68,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
 
         //Sends the user back to RecipeList window
         public ICommand GoBackCommand { get; }
+        public ICommand EditUserCommand { get; }
 
         //constructor
         public UserDetailsViewModel()
@@ -78,6 +79,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             LoggedInUser = _userManager.GetLoggedIn();
 
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
+            EditUserCommand = new RelayCommand(execute => ExecuteEditUser());
         }
 
         //methods
@@ -92,7 +94,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
         //Lets the user edit the user info.
         private void ExecuteEditUser()
         {
-
+            _navigationManager.CreateAndShowWindow<EditUserWindow>();
+            _navigationManager.CloseWindow<UserDetailsWindow>();
         }
 
     }

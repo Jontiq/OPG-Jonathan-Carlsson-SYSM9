@@ -30,6 +30,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.8*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Username: "
                        HorizontalAlignment="Right"
@@ -40,13 +41,43 @@
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"/>
-            <!--USERNAME IS TAKEN OR MINIMUM 4 CHARACTERS, OR BOTH!-->
-            <TextBlock Text="ERRORMESSAGE"
+            <!--USERNAME IS TAKEN-->
+            <TextBlock Text="Username is not available!"
                        Grid.Row="1"
                        Grid.Column="1"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Foreground="Red">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility"
+                                Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UsernameTaken}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <!--MINIMUM 4 CHARACTERS-->
+            <TextBlock Text="Minimum 4 characters!"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Foreground="Red">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility"
+                                Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UsernameLessThan4}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
             </TextBlock>
         </Grid>
         <!--COUNTRY-->
@@ -72,7 +103,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Password: "
+            <TextBlock Text="New Password: "
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        FontSize="15"/>
@@ -166,12 +197,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Go Back"
+            <Button Content="Cancel"
                     Command="{Binding GoBackCommand}"
                     Margin="10"
                     Width="150"/>
             <Button Content="Save"
-                    Command="{Binding RegisterUserCommand}"
+                    Command="{Binding SaveUserCommand}"
                     Grid.Column="1"
                     Margin="10"
                     Width="150"/>

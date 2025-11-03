@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -92,6 +93,22 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
 
             //adds it to the users
             _users.Add(newUser);
+        }
+
+        //Updates the user information
+        public void UpdateUser(User updatedUser)
+        {
+            //Finds the user and updates the user info
+            foreach (User u in Users)
+            {
+                if (u.Id == updatedUser.Id)
+                {
+                    u.Username = updatedUser.Username;
+                    u.Password = updatedUser.Password;
+                    u.Country = updatedUser.Country;
+                    break;
+                }
+            }
         }
     }
 
