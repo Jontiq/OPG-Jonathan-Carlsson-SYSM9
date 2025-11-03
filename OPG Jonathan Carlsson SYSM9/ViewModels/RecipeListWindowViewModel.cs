@@ -185,6 +185,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                 return false;
             }
         }
+
         //Lets the user open the cookmaster information windwow
         private void ExecuteInformation()
         {
@@ -228,7 +229,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
         //Opens "User details"
-
         public void ExecuteUserDetails()
         {
             _navigationManager.CreateAndShowWindow<UserDetailsWindow>();
@@ -273,7 +273,6 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                     ShownRecipes.Add(r);
                 }
             }
-            //The shown recipes are now instead the result.
         }
     }
 }

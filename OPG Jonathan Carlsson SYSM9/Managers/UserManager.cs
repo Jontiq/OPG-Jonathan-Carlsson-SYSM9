@@ -34,6 +34,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             {
                 if(u.Username == username && u.Password == password)
                 {
+                    //Input 2FA here i believe
                     LoggedIn = u;
                     return true;
                 }
