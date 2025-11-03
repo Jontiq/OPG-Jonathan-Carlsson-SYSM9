@@ -84,7 +84,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
 
             if (success)
             {
-                _navigationManager.CreateAndShowWindow<RecipeListWindow>();
+                _navigationManager.CreateAndShowWindow<TwoFactorAuthWindow>();
                 _navigationManager.CloseWindow<LoginWindow>();
             }
             else

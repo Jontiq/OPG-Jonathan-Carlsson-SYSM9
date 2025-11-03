@@ -34,11 +34,13 @@
                            FontSize="15"/>
                 <!--BINDING HERE TO TWOFA-INPUT-->
                 <TextBox Grid.Row="1"
+                         Text="{Binding EnteredCode}"
                          FontSize="15"
                          TextAlignment="Center"/>
             </Grid>
             <!--BINDING HERE TO COMMAND FOR VERTIFICATION-->
             <Button Grid.Row="3"
+                    Command="{Binding ConfirmCodeCommand}"
                     Content="Verify"
                     FontSize="15"
                     Margin="20"/>
