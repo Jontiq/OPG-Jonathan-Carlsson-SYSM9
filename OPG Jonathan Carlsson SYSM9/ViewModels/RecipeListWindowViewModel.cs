@@ -49,8 +49,44 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         }
 
 
-        //Will store the observable recipes for the specific logged in user OR all if they have an Admin role.
-        public ObservableCollection<Recipe> Recipes { get; set; }
+
+        //These are the recipes that the logged in user has access to.
+        //If a normal user, only the user created recipes will be stored. If an admin, all recipes will be stored.
+        private ObservableCollection<Recipe> _accessRecipes;
+        public ObservableCollection<Recipe> AccessRecipes
+        {
+            get { return _accessRecipes; }
+            set
+            {
+                _accessRecipes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //These are recipes shown in the datagrid. This will be manipulated by the filter.
+        private ObservableCollection<Recipe> _shownRecipes;
+        public ObservableCollection<Recipe> ShownRecipes
+        {
+            get { return _shownRecipes; }
+            set
+            {
+                _shownRecipes = value;
+                OnPropertyChanged();
+            }
+        }
+        //Acts as the filter field value
+        private string _filterText;
+        public string FilterText
+        {
+            get { return _filterText; }
+            set
+            {
+                _filterText = value;
+                OnPropertyChanged();
+                //Everytime the filter value is set, the "ApplyFilter" method is called.
+                ApplyFilter();
+            }
+        }
 
         //Lets the user Logout
         public ICommand LogoutCommand { get; }
@@ -89,14 +125,30 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //If the user is Admin, then all recipes are loaded.
         private void LoadRecipes()
         {
+            //If the logged-in user is an Admin, load ALL recipes.
             if (LoggedIn.IsAdmin)
             {
-                Recipes = new ObservableCollection<Recipe>(_recipeManager.GetAllRecipes());
+                AccessRecipes = new ObservableCollection<Recipe>(_recipeManager.Recipes);
             }
+            //If the user is not Admin, only load recipes created by that user.
             else
             {
-                Recipes = new ObservableCollection<Recipe>(_recipeManager.GetByUser(LoggedIn.Id));
+                //Creates empty collection
+                ObservableCollection<Recipe> userRecipes = new ObservableCollection<Recipe>();
+                //Goes through all recipes
+                foreach (Recipe r in _recipeManager.Recipes)
+                {
+                    //If the recipe createdByID matches the currently logged in user, then it will add that recipe to "userRecipes"
+                    if (r.CreatedByID == LoggedIn.Id)
+                    {
+                        userRecipes.Add(r);
+                    }
+                }
+                //AccessRecipes now mirror the userRecipes
+                AccessRecipes = userRecipes;
             }
+            //At startup, ShownRecipes should mirror AccessRecipes now, meaning everything the user has access to is initially displayed.
+            ShownRecipes = new ObservableCollection<Recipe>(AccessRecipes);
         }
 
         //Lets the user logout and return to the login window
@@ -154,11 +206,24 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                     if (_recipeManager.Recipes[i].Id == SelectedRecipe.Id)
                     {
                         _recipeManager.Recipes.RemoveAt(i);
-                        break;
                     }
                 }
-                //Removes recipe from the datagrid (AKA Recipes in this class)
-                Recipes.Remove(SelectedRecipe);
+                //Removes the selected recipe from AccessRecipes using the Recipe ID.
+                for (int i = AccessRecipes.Count - 1; i >= 0; i--)
+                {
+                    if (AccessRecipes[i].Id == SelectedRecipe.Id)
+                    {
+                        AccessRecipes.RemoveAt(i);
+                    }
+                }
+                //Removes the selected recipe from ShownRecipes using the Recipe ID.
+                for (int i = ShownRecipes.Count - 1; i >= 0; i--)
+                {
+                    if (ShownRecipes[i].Id == SelectedRecipe.Id)
+                    {
+                        ShownRecipes.RemoveAt(i);
+                    }
+                }
             }
         }
 
@@ -168,6 +233,47 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         {
             _navigationManager.CreateAndShowWindow<UserDetailsWindow>();
             _navigationManager.CloseWindow<RecipeListWindow>();
+        }
+
+        //Changes the shown recipes in "ShownRecipes" depening on the value set in filter.
+        private void ApplyFilter()
+        {
+            //If the filter field is empty, All the recipes the user has access to is shown
+            if (string.IsNullOrWhiteSpace(FilterText))
+            {
+                //Clears the list (Maybe this works instead of making new list everytime its empty instead?)
+                ShownRecipes.Clear();
+
+                //Copy all recipes from AccessRecipes
+                foreach (Recipe r in AccessRecipes)
+                {
+                    ShownRecipes.Add(r);
+                }
+
+                return;
+            }
+
+            //Converts the filtertext to lowercase for better matchability
+            string filter = FilterText.ToLower();
+            //Clears list again, since we will fill it later with what matches with the filter.
+            ShownRecipes.Clear();
+
+
+            foreach (Recipe r in AccessRecipes)
+            {
+                //sets all the "searchable" fields to lowercase, also for matchabilty
+                string title = r.Title.ToLower();
+                string category = r.Category.ToLower();
+                //converts the date to string value. I also use "MM" for months, otehrwise for some reason it would mean minutes
+                string date = r.Date.ToString("yyyy-MM-dd");
+
+                //If any of the recipes fields match (contains the filter value), it is added to our result list
+                if (title.Contains(filter) || category.Contains(filter) || date.Contains(filter))
+                {
+                    ShownRecipes.Add(r);
+                }
+            }
+            //The shown recipes are now instead the result.
         }
     }
 }

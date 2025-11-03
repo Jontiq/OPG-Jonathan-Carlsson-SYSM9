@@ -47,12 +47,13 @@
                            Text="Filter: "/>
                     <!--FILTER INPUT-->
                     <TextBox Width="250"
-                             Height="23"/>
+                             Height="23"
+                             Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Grid>
         </Grid>
         <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding Recipes}"
+                  ItemsSource="{Binding ShownRecipes}"
                   SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
                   HeadersVisibility="Column"
