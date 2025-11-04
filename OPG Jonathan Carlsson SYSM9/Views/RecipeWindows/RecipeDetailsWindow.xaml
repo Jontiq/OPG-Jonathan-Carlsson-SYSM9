@@ -33,7 +33,7 @@
                        FontSize="15"/>
             <!--BIND TO TITLE-->
             <TextBox Grid.Column="1"
-                     Text="{Binding Title,Mode=TwoWay}"
+                     Text="{Binding Title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -51,7 +51,7 @@
                 FontSize="15"/>
             <!--BIND TO CATEGORY-->
             <TextBox Grid.Column="1"
-                     Text="{Binding Category,Mode=TwoWay}"
+                     Text="{Binding Category,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -69,7 +69,7 @@
                        FontSize="15"/>
             <!--BIND TO INSTRUCTIONS-->
             <TextBox Grid.Column="1"
-                     Text="{Binding Instructions,Mode=TwoWay}"
+                     Text="{Binding Instructions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"
@@ -88,7 +88,7 @@
                        FontSize="15"/>
             <!--BIND TO INGREDIENTS-->
             <TextBox Grid.Column="1"
-                     Text="{Binding Ingredients,Mode=TwoWay}"
+                     Text="{Binding Ingredients,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="15"
                      Margin="5"

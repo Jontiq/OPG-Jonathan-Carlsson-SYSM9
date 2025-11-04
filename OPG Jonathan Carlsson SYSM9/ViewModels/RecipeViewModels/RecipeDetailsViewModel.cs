@@ -41,6 +41,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             {
                 _title = value;
                 OnPropertyChanged();
+                UpdateCanSave();
             }
         }
         private string _category;
@@ -51,6 +52,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             {
                 _category = value;
                 OnPropertyChanged();
+                UpdateCanSave();
             }
         }
 
@@ -62,6 +64,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             { 
                 _instructions = value;
                 OnPropertyChanged();
+                UpdateCanSave();
             }
         }
 
@@ -73,6 +76,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             {
                 _ingredients = value;
                 OnPropertyChanged();
+                UpdateCanSave();
             }
         }
 
@@ -108,6 +112,19 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
                 OnPropertyChanged();
             }
         }
+
+        private bool _canSave;
+
+        public bool CanSave
+        {
+            get { return _canSave; }
+            set 
+            {
+                _canSave = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         //Lets the user cancel registrating new recipe and goes back to RecipeListWindow
@@ -227,31 +244,19 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             //feedback :)
             MessageBox.Show("Changes saved successfully!", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
+        //This will mirror the can save boolean value
         private bool CanExecuteSaveRecipeChanges()
         {
-            //Checks so that no fields is empty while editing
-            if (string.IsNullOrWhiteSpace(Title))
-            {
-                return false;
-            }
+            return CanSave;
+        }
 
-            if (string.IsNullOrWhiteSpace(Ingredients))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(Instructions))
-            {
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(Category))
-            {
-                return false;
-            }
-
-            //All fields have data
-            return true;
+        //Everytime a input field is set, this field is called. 
+        private void UpdateCanSave()
+        {
+            CanSave = !string.IsNullOrWhiteSpace(Title)
+                   && !string.IsNullOrWhiteSpace(Ingredients)
+                   && !string.IsNullOrWhiteSpace(Instructions)
+                   && !string.IsNullOrWhiteSpace(Category);
         }
 
         private void ExecuteCopyRecipe()
