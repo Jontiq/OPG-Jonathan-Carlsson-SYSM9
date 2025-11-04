@@ -34,14 +34,5 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
                 }
             }
         }
-        //Closes all windows except T
-        public void CloseAllExcept<T>() where T : Window
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is not T)
-                    window.Close();
-            }
-        }
     }
 }

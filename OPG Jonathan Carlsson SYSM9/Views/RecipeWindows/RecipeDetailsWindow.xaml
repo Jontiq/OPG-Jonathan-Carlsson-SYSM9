@@ -74,7 +74,9 @@
                      FontSize="15"
                      Margin="5"
                      Height="95"
-                     IsReadOnly="{Binding IsReadOnly}"/>
+                     IsReadOnly="{Binding IsReadOnly}"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <!--INGREDIENTS-->
         <Grid Grid.Row="4">
@@ -93,7 +95,9 @@
                      FontSize="15"
                      Margin="5"
                      Height="95"
-                     IsReadOnly="{Binding IsReadOnly}"/>
+                     IsReadOnly="{Binding IsReadOnly}"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <!--CREATED BY AND DATE-->
         <Grid Grid.Row="5">

@@ -25,8 +25,16 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             AddRecipe(new Recipe(
                 0,
                 "Spaghetti Bolognese",
-                "Spaghetti, Minced meat, Tomato sauce, Onion, Garlic",
+                "Spaghetti\nMinced meat\nTomato sauce\nOnion\nGarlic",
                 "1. Boil spaghetti\n2. Fry the minced meat\n3. Mix EVERYTHING else and serve :)",
+                "Dinner",
+                new DateTime(2025, 10, 30),
+                1));
+            AddRecipe(new Recipe(
+                0,
+                "Creamy Chicken Alfredo",
+                "Fettuccine\nChicken breast\nCream\nParmesan cheese\nGarlic\nButter",
+                "1. Cook the pasta\n2. Fry the chicken until golden\n3. Add butter, garlic, cream, and cheese to make the sauce\n4. Mix it all together and enjoy!",
                 "Dinner",
                 new DateTime(2025, 10, 30),
                 1));
@@ -34,10 +42,18 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             AddRecipe(new Recipe(
                 0,
                 "Pancakes",
-                "Milk, Eggs, Flour",
+                "Milk\nEggs\nFlour",
                 "Mix and fry.",
                 "Breakfast",
-                DateTime.Now,
+                new DateTime(2025, 10, 30),
+                2));
+            AddRecipe(new Recipe(
+                0,
+                "Taco Bowl",
+                "Rice\nMinced beef\nCorn\nBeans\nLettuce\nTomato\nSour cream\nCheese",
+                "1. Cook the rice\n2. Fry the minced beef with taco seasoning\n3. Add toppings and build your own bowl!",
+                "Dinner",
+                new DateTime(2025, 11, 4),
                 2));
         }
 

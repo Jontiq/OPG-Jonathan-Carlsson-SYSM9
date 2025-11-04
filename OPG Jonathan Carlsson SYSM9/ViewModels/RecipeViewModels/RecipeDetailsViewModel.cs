@@ -256,7 +256,8 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             CanSave = !string.IsNullOrWhiteSpace(Title)
                    && !string.IsNullOrWhiteSpace(Ingredients)
                    && !string.IsNullOrWhiteSpace(Instructions)
-                   && !string.IsNullOrWhiteSpace(Category);
+                   && !string.IsNullOrWhiteSpace(Category)
+                   && !IsReadOnly;
         }
 
         private void ExecuteCopyRecipe()
