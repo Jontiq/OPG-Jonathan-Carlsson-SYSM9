@@ -201,31 +201,41 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
             //Removes the recipe bu the recipe ID reference from the Recipe list in RecipeManager and in the datagrid view.
             if (result == MessageBoxResult.Yes)
             {
+                var id = SelectedRecipe.Id;
+                var Item = SelectedRecipe;
                 //Removes the selected recipe from Recipes list in RecipeManager using the Recipe ID.
-                for (int i = 0; i < _recipeManager.Recipes.Count; i++)
+                for (int i = _recipeManager.Recipes.Count - 1; i >= 0; i--)
                 {
-                    if (_recipeManager.Recipes[i].Id == SelectedRecipe.Id)
+                    var r = _recipeManager.Recipes[i];
+                    if (r != null && r.Id == id)
                     {
                         _recipeManager.Recipes.RemoveAt(i);
+                        break;
                     }
                 }
                 //Removes the selected recipe from AccessRecipes using the Recipe ID.
-                for (int i = 0; i < AccessRecipes.Count; i++)
+                for (int i = AccessRecipes.Count - 1; i >= 0; i--)
                 {
-                    if (AccessRecipes[i].Id == SelectedRecipe.Id)
+                    var r = AccessRecipes[i];
+                    if (r != null && r.Id == id)
                     {
                         AccessRecipes.RemoveAt(i);
+                        break;
                     }
                 }
                 //Removes the selected recipe from ShownRecipes using the Recipe ID.
-                for (int i = 0; i < ShownRecipes.Count; i++)
+                for (int i = ShownRecipes.Count - 1; i >= 0; i--)
                 {
-                    if (ShownRecipes[i].Id == SelectedRecipe.Id)
+                    var r = ShownRecipes[i];
+                    if (r != null && r.Id == id)
                     {
                         ShownRecipes.RemoveAt(i);
+                        break;
                     }
                 }
             }
+            //Sets selected recipe to nothing
+            SelectedRecipe = null;
         }
 
         //Opens "User details"
