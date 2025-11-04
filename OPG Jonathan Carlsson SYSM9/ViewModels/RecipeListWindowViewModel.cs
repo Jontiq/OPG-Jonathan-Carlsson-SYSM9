@@ -210,7 +210,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                     }
                 }
                 //Removes the selected recipe from AccessRecipes using the Recipe ID.
-                for (int i = AccessRecipes.Count - 1; i >= 0; i--)
+                for (int i = 0; i < AccessRecipes.Count; i++)
                 {
                     if (AccessRecipes[i].Id == SelectedRecipe.Id)
                     {
@@ -218,7 +218,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
                     }
                 }
                 //Removes the selected recipe from ShownRecipes using the Recipe ID.
-                for (int i = ShownRecipes.Count - 1; i >= 0; i--)
+                for (int i = 0; i < ShownRecipes.Count; i++)
                 {
                     if (ShownRecipes[i].Id == SelectedRecipe.Id)
                     {

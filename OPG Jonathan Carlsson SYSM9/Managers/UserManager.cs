@@ -24,7 +24,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.Managers
             //"normal" user
             _users.Add(new User(1,"user", "password", "sweden", "write 'answer' in the answer field", "answer", false));
             //"admin" user
-            _users.Add(new AdminUser(2,"admin", "password", "sweden", "write 'answer' in the answer field", "answer",true));
+            _users.Add(new User(2,"admin", "password", "sweden", "write 'answer' in the answer field", "answer",true));
         }
 
         //Allowes user to log in if username and password match, and returns boolean value "TRUE".
