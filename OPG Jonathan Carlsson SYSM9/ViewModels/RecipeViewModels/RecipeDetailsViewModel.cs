@@ -4,6 +4,7 @@ using OPG_Jonathan_Carlsson_SYSM9.Models;
 using OPG_Jonathan_Carlsson_SYSM9.Views;
 using OPG_Jonathan_Carlsson_SYSM9.Views.RecipeWindows;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -129,7 +130,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
 
             GoBackCommand = new RelayCommand(execute => ExecuteGoBack());
             EditCommand = new RelayCommand(execute => ExecuteEdit(), canExecute => CanExecuteEdit());
-            SaveCommand = new RelayCommand(execute => ExecuteSaveRecipeChanges());
+            SaveCommand = new RelayCommand(execute => ExecuteSaveRecipeChanges(),canExecute => CanExecuteSaveRecipeChanges());
             CopyCommand = new RelayCommand(execute => ExecuteCopyRecipe(), canExecute => CanExecuteEdit());
 
 
@@ -225,6 +226,32 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels.RecipeViewModels
             IsReadOnly = true;
             //feedback :)
             MessageBox.Show("Changes saved successfully!", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private bool CanExecuteSaveRecipeChanges()
+        {
+            //Checks so that no fields is empty while editing
+            if (string.IsNullOrWhiteSpace(Title))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Ingredients))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Instructions))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Category))
+            {
+                return false;
+            }
+
+            //All fields have data
+            return true;
         }
 
         private void ExecuteCopyRecipe()
