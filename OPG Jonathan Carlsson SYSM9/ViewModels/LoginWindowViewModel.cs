@@ -96,7 +96,7 @@ namespace OPG_Jonathan_Carlsson_SYSM9.ViewModels
         //Helps us gray out the login button, meaning that both fields in the login UI must have data
         private bool CanExecuteLogin()
         {
-            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput) && PasswordInput.Length >= 8;
+            return !string.IsNullOrWhiteSpace(UsernameInput) && !string.IsNullOrWhiteSpace(PasswordInput) /*&&*/ /*PasswordInput.Length >= 8*/;
         }
         //Opens RegisterWindow and HIDES LoginWindow
         private void ExecuteRegister()
